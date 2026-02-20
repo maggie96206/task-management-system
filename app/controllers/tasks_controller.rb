@@ -1,5 +1,5 @@
 class TasksController < ApplicationController
-    before_action :set_task, only: [:show, :edit, :update, :destroy]
+    before_action :set_task, only: [ :show, :edit, :update, :destroy ]
 
   def index
     @tasks = Task.all # 從資料庫撈出所有任務，交給 View 顯示
@@ -47,5 +47,4 @@ class TasksController < ApplicationController
     # 允許 Migration 定義過的欄位
     params.require(:task).permit(:title, :content, :start_at, :end_at, :priority, :status)
   end
-
 end
