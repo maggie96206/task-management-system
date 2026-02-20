@@ -1,0 +1,36 @@
+<%= form_with(model: task, local: true) do |f| %>
+
+  <div>
+    <%= f.label :title, "任務標題" %>
+    <%= f.text_field :title %>
+  </div>
+
+  <div>
+    <%= f.label :content, "內容" %>
+    <%= f.text_area :content %>
+  </div>
+
+  <div>
+    <%= f.label :start_at, "開始時間" %>
+    <%= f.datetime_field :start_at %>
+  </div>
+
+  <div>
+    <%= f.label :end_at, "結束時間" %>
+    <%= f.datetime_field :end_at %>
+  </div>
+
+  <div>
+    <%= f.label :priority, "優先度" %>
+    <%= f.select :priority, [1, 2, 3] %>
+    <% # ["1 - 高", 1], ["2 - 中", 2], ["3 - 低", 3] %>
+  </div>
+
+  <div>
+    <%= f.label :status, "狀態" %>
+    <%= f.select :status, [0, 1, 2] %>
+    <% # ["待處理", 0], ["進行中", 1], ["已完成", 2] %>
+  </div>
+
+  <%= f.submit %>
+<% end %>
