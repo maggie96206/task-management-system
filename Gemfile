@@ -1,5 +1,6 @@
 source "https://rubygems.org"
 ruby "3.4.2"
+gem 'tailwindcss-rails'
 
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
 gem "rails", "~> 8.1.2"
@@ -58,6 +59,7 @@ end
 group :development do
   # Use console on exceptions pages [https://github.com/rails/web-console]
   gem "web-console"
+  gem 'rails-mermaid_erd'
 end
 
 group :test do
