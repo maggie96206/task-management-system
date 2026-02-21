@@ -13,48 +13,49 @@ Things you may want to cover:
 
 * Database creation
 
-Table tags {
-  id integer [primary key]
-  user_id integer [not null]
-  name varchar [not null]
-  created_at timestamp
-}
+```mermaid
+erDiagram
+    users ||--o{ tasks : "creates"
+    users ||--o{ tags : "defines"
+    tasks ||--o{ tasks_tags : "has"
+    tags ||--o{ tasks_tags : "belongs_to"
 
-Table tasks_tags {
-  id integer [primary key]
-  tag_id integer [not null]
-  task_id integer [not null]
-  created_at timestamp
-}
+    users {
+        integer id PK
+        varchar username
+        varchar email
+        varchar password_digest
+        integer role
+        timestamp created_at
+    }
 
-Table users {
-  id integer [primary key]
-  username varchar
-  email varchar [unique]
-  password_digest varchar
-  role integer [default: 0, note:'0:一般, 1:管理者']
-  created_at timestamp
-}
+    tasks {
+        integer id PK
+        integer user_id FK
+        varchar title
+        text content
+        datetime start_at
+        datetime end_at
+        integer priority
+        integer status
+        timestamp created_at
+    }
 
-Table tasks {
-  id integer [primary key]
-  title varchar [not null]
-  content text [note: 'Content of the task']
-  start_at datetime
-  end_at datetime
-  priority integer [default: 5, note: '1: 高, 5: 低']
-  user_id integer [not null]
-  status integer [note:'0: 待處理, 1: 進行中, 2: 已完成']
-  created_at timestamp
-}
+    tags {
+        integer id PK
+        integer user_id FK
+        varchar name
+        timestamp created_at
+    }
 
-Ref: users.id < tasks.user_id 
-
-Ref tasks_tags: tasks.id < tasks_tags.task_id
-
-Ref tags_tasks: tags.id < tasks_tags.tag_id
-
-Ref: users.id < tags.user_id
+    tasks_tags {
+        integer id PK
+        integer task_id FK
+        integer tag_id FK
+        timestamp created_at
+    }
+    
+```
 
 * Database initialization
 
