@@ -15,7 +15,7 @@ class TasksController < ApplicationController
   def create
     @task = Task.new(task_params)
     if @task.save
-      redirect_to tasks_path, notice: "任務已成功建立！" # Flash 訊息
+      redirect_to tasks_path, notice: t("tasks.flash.create") # Flash 訊息
     else
       render :new
     end
@@ -26,7 +26,7 @@ class TasksController < ApplicationController
 
   def update
     if @task.update(task_params)
-      redirect_to tasks_path, notice: "任務已更新！"
+      redirect_to tasks_path, notice: t("tasks.flash.update")
     else
       render :edit
     end
@@ -34,7 +34,7 @@ class TasksController < ApplicationController
 
   def destroy
     @task.destroy
-    redirect_to tasks_path, notice: "任務已刪除！"
+    redirect_to tasks_path, notice: t("tasks.flash.delete")
   end
 
   private

@@ -1,38 +1,38 @@
-<h1 class="mb-4">任務詳情</h1>
+<h1 class="mb-4"><%= t('tasks.index.view_task') %></h1>
 
 <div class="space-y-6">
     <p>
-    <strong>標題：</strong>
+    <strong><%= t('activerecord.attributes.task.title') %>：</strong>
     <%= @task.title %>
     </p>
 
     <p>
-    <strong>內容：</strong>
+    <strong><%= t('activerecord.attributes.task.content') %>：</strong>
     <%= @task.content %>
     </p>
 
     <p>
-    <strong>開始時間：</strong>
+    <strong><%= t('activerecord.attributes.task.start_at') %>：</strong>
     <%= @task.start_at %>
     </p>
 
     <p>
-    <strong>結束時間：</strong>
+    <strong><%= t('activerecord.attributes.task.end_at') %>：</strong>
     <%= @task.end_at %>
     </p>
 
     <p>
-    <strong>優先度：</strong>
+    <strong><%= t('activerecord.attributes.task.priority') %>：</strong>
     <%= @task.priority %>
     </p>
 
     <p>
-    <strong>狀態：</strong>
+    <strong><%= t('activerecord.attributes.task.status') %>：</strong>
     <%= @task.status %>
     </p>
 </div>
 
 
 
-<%= link_to "編輯此任務", edit_task_path(@task) , class: "btn-primary" %>
-<%= link_to "返回列表", tasks_path , class: "btn-primary" %>
+<%= link_to t('tasks.button.edit'), edit_task_path(@task) , class: "btn-primary" %>
+<%= link_to t('tasks.button.return'), tasks_path , class: "btn-primary" %>

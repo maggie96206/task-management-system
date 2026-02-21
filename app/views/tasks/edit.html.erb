@@ -1,3 +1,3 @@
-<h1 class="mb-4">編輯任務</h1>
+<h1 class="mb-4"><%= t('tasks.index.edit_task') %></h1>
 <%= render "form", task: @task %>
-<%= link_to "取消", tasks_path, class: "btn-primary" %>
+<%= link_to t('tasks.button.quit'), tasks_path, class: "btn-primary" %>

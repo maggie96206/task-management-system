@@ -1,0 +1,40 @@
+zh-TW:
+  activerecord:
+    models:
+      task: "任務"
+    attributes:
+      task:
+        title: "任務標題"
+        content: "內容"
+        start_at: "開始時間"
+        end_at: "結束時間"
+        priority: "優先度"
+        status: "狀態"
+  
+  tasks:
+    index:
+      title: "任務列表"
+      new_task: "新增任務"
+      edit_task: "編輯列表"
+      view_task: "任務詳情"
+    button:
+      view: "檢視"
+      edit: "編輯"
+      delete: "刪除"
+      submit: "送出任務"
+      quit: "取消"
+      return: "返回列表"
+    priorities:
+      high: "1 - 高"
+      medium: "2 - 中"
+      low: "3 - 低"
+    statuses:
+      pending: "待處理"
+      processing: "進行中"
+      completed: "已完成"
+    common:
+      confirm_delete: "確定要刪除嗎？"
+    flash:
+      create: "任務已成功建立！"
+      update: "任務已更新成功！"
+      delete: "任務已刪除！"

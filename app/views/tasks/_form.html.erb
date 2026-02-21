@@ -1,38 +1,38 @@
 <%= form_with(model: task, local: true, class: "space-y-6 max-w-lg") do |f| %>
 
   <div class="flex flex-col">
-    <%= f.label :title, "任務標題", class: "text-secondary" %>
+    <%= f.label :title, t('activerecord.attributes.task.title'), class: "text-secondary" %>
     <%= f.text_field :title, class: "input" %>
   </div>
 
   <div class="flex flex-col">
-    <%= f.label :content, "內容", class: "text-secondary" %>
+    <%= f.label :content, t('activerecord.attributes.task.content'), class: "text-secondary" %>
     <%= f.text_area :content, rows: 3, class: "input" %>
   </div>
 
   <div class="grid grid-cols-2 gap-4">
     <div>
-      <%= f.label :start_at, "開始時間", class: "text-secondary" %>
+      <%= f.label :start_at, t('activerecord.attributes.task.start_at'), class: "text-secondary" %>
       <%= f.datetime_field :start_at, class: "input text-sm" %>
     </div>
     <div>
-      <%= f.label :end_at, "結束時間", class: "text-secondary" %>
+      <%= f.label :end_at, t('activerecord.attributes.task.end_at'), class: "text-secondary" %>
       <%= f.datetime_field :end_at, class: "input text-sm" %>
     </div>
   </div>
 
   <div class="grid grid-cols-2 gap-4">
     <div>
-      <%= f.label :priority, "優先度", class: "text-secondary" %>
-      <%= f.select :priority, [["1 - 高", 1], ["2 - 中", 2], ["3 - 低", 3]], {}, { class: "input" } %>
+      <%= f.label :priority, t('activerecord.attributes.task.priority'), class: "text-secondary" %>
+      <%= f.select :priority, [[t('tasks.priorities.high'), 1], [t('tasks.priorities.medium'), 2], [t('tasks.priorities.low'), 3]], {}, { class: "input" } %>
     </div>
     <div>
-      <%= f.label :status, "狀態", class: "text-secondary" %>
-      <%= f.select :status, [["待處理", 0], ["進行中", 1], ["已完成", 2]], {}, { class: "input" } %>
+      <%= f.label :status, t('activerecord.attributes.task.status'), class: "text-secondary" %>
+      <%= f.select :status, [[t('tasks.statuses.pending'), 0], [t('tasks.statuses.processing'), 1], [t('tasks.statuses.completed'), 2]], {}, { class: "input" } %>
     </div>
   </div>
 
   <div>
-    <%= f.submit "送出任務", class: "btn-primary" %>
+    <%= f.submit t('tasks.button.submit'), class: "btn-primary" %>
   </div>
 <% end %>

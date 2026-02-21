@@ -1,16 +1,16 @@
-<h1 class="mb-4">任務列表</h1>
+<h1 class="mb-4"><%= t('tasks.index.title') %></h1>
 <%= link_to "新增任務", new_task_path, class: "btn-primary" %>
 
 <table>
   <thead>
     <tr>
-      <th>標題</th>
-      <th>內容</th>
-      <th>開始時間</th>
-      <th>結束時間</th>
-      <th>優先度</th>
-      <th>狀態</th>
-      <th>動作</th>
+      <th><%= t('activerecord.attributes.task.title') %></th>
+      <th><%= t('activerecord.attributes.task.content') %></th>
+      <th><%= t('activerecord.attributes.task.start_at') %></th>
+      <th><%= t('activerecord.attributes.task.end_at') %></th>
+      <th><%= t('activerecord.attributes.task.priority') %></th>
+      <th><%= t('activerecord.attributes.task.status') %></th>
+      <th></th>
     </tr>
   </thead>
 
@@ -24,9 +24,9 @@
         <td><%= task.priority %></td>
         <td><%= task.status %></td>
         <td>
-            <%= link_to "檢視", task_path(task), class: "btn-primary" %>
-            <%= link_to "編輯", edit_task_path(task), class: "btn-primary" %>
-            <%= link_to "刪除", task_path(task), data: { turbo_method: :delete, turbo_confirm: "確定要刪除嗎？" }, class: "btn-primary" %>
+            <%= link_to t('tasks.button.view'), task_path(task), class: "btn-primary" %>
+            <%= link_to t('tasks.button.edit'), edit_task_path(task), class: "btn-primary" %>
+            <%= link_to t('tasks.button.delete'), task_path(task), data: { turbo_method: :delete, turbo_confirm: t('tasks.common.confirm_delete') }, class: "btn-primary" %>
         </td>
     </tr>
     <% end %>
