@@ -5,7 +5,6 @@ RSpec.feature "Task Management", type: :feature do
   let!(:task) { create(:task, title: "舊任務", priority: 2, status: 0) }
 
   describe "Task CRUD operations" do
-
     context "when editing a task" do
       before do
         visit edit_task_path(task)
