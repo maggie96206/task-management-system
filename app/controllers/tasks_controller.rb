@@ -9,7 +9,8 @@ class TasksController < ApplicationController
   end
 
   def new
-    @task = Task.new(start_at: Time.current, end_at: Time.current + 1.hour)
+    @task = Task.new(start_at: Time.current)
+    @task.end_at = @task.start_at + 1.hour
   end
 
   def create

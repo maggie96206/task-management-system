@@ -3,7 +3,7 @@ FactoryBot.define do
     title { Faker::Lorem.sentence(word_count: 3) }
     content { Faker::Lorem.paragraph }
     start_at { Time.current }
-    end_at { Time.current + 1.hour }
+    end_at { |task| task.start_at + 1.hour }
     priority { 3 }
     status { 0 }
   end
