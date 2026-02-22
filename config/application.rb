@@ -25,5 +25,11 @@ module TaskManagementSystem
     # config.eager_load_paths << Rails.root.join("extras")
 
     config.i18n.default_locale = :"zh-TW"
+
+    # 設定 Rails 應用的時區
+    config.time_zone = "Taipei"
+
+    # 設定資料庫儲存的時間格式（通常保持 UTC，但 Rails 會自動幫你轉換）
+    config.active_record.default_timezone = :utc
   end
 end
