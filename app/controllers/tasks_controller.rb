@@ -2,7 +2,7 @@ class TasksController < ApplicationController
     before_action :set_task, only: [ :show, :edit, :update, :destroy ]
 
   def index
-    @tasks = Task.all # 從資料庫撈出所有任務，交給 View 顯示
+    @tasks = Task.order(created_at: :desc)
   end
 
   def show

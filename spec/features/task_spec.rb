@@ -1,10 +1,11 @@
 require "rails_helper"
 
 RSpec.feature "Task Management", type: :feature do
-  let!(:task) { create(:task, title: "舊任務", priority: 2, status: 0) }
-
-  describe "Task CRUD operations" do
+  # let!(:task) { create(:task, title: "舊任務", priority: 2, status: 0) }
   subject { page }
+  describe "Task CRUD operations" do
+    let!(:task) { create(:task, title: "舊任務", priority: 2, status: 0) }
+
     context "when editing a task" do
       before do
         visit edit_task_path(task)
@@ -34,5 +35,17 @@ RSpec.feature "Task Management", type: :feature do
       it { is_expected.to have_current_path tasks_path }
       it { is_expected.not_to have_content "舊任務" }
     end
+  end
+
+  describe "Task sorting" do
+    let!(:old_task) { create(:task, title: "舊任務", created_at: 1.day.ago) }
+    let!(:new_task) { create(:task, title: "新任務", created_at: Time.zone.now) }
+
+    before { visit tasks_path }
+
+    subject { all('.task-title').map(&:text) }
+    it { is_expected.to eq [ "新任務", "舊任務" ] }
+
+    # it { expect(all('.task-title').map(&:text)).to eq [ "新任務", "舊任務" ] }
   end
 end
