@@ -1,5 +1,20 @@
 <%= form_with(model: task, local: true, class: "space-y-6 max-w-lg") do |f| %>
 
+  <% if task.errors.any? %>
+    <div class="error-messages">
+      <%# <h2 style="color: red;"> %>
+        <%# <%= t('errors.template.header', count: task.errors.count, model: Task.model_name.human) %> 
+      <%# </h2> %>
+      <ul>
+        <% task.errors.full_messages.each do |message| %>
+          <li style="color: red;"><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+
+
   <div class="flex flex-col">
     <%= f.label :title, t('activerecord.attributes.task.title'), class: "text-secondary" %>
     <%= f.text_field :title, class: "input" %>

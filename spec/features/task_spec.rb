@@ -1,7 +1,6 @@
 require "rails_helper"
 
 RSpec.feature "Task Management", type: :feature do
-  # let!(:task) { create(:task, title: "舊任務", priority: 2, status: 0) }
   subject { page }
   describe "Task CRUD operations" do
     let!(:task) { create(:task, title: "舊任務", priority: 2, status: 0) }
@@ -45,7 +44,20 @@ RSpec.feature "Task Management", type: :feature do
 
     subject { all('.task-title').map(&:text) }
     it { is_expected.to eq [ "新任務", "舊任務" ] }
+  end
 
-    # it { expect(all('.task-title').map(&:text)).to eq [ "新任務", "舊任務" ] }
+  describe "Task validation" do
+    subject { task }
+    let(:task) { build(:task) }
+
+    context "when title is null" do
+      let(:task) { build(:task, title: nil) }
+      it { is_expected.not_to be_valid }
+    end
+
+    context "when end_at is before start_at" do
+      let(:task) { build(:task, start_at: Time.zone.now, end_at: 1.day.ago) }
+      it { is_expected.not_to be_valid }
+    end
   end
 end

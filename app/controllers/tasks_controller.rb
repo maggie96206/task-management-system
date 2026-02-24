@@ -18,7 +18,7 @@ class TasksController < ApplicationController
     if @task.save
       redirect_to tasks_path, notice: t("tasks.flash.create") # Flash 訊息
     else
-      render :new
+      render :new, status: :unprocessable_entity
     end
   end
 

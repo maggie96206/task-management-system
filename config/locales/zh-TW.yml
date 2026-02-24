@@ -10,6 +10,24 @@ zh-TW:
         end_at: "結束時間"
         priority: "優先度"
         status: "狀態"
+    
+    errors:
+      messages:
+        blank: "不能為空白"
+      models:
+        task:
+          attributes:
+            title:
+              blank: "不能為空白"
+            end_at:
+              before_start_at: "須比開始時間晚"  
+  
+  errors:
+    template:
+      header:
+        one: "有 1 個錯誤導致 %{model} 儲存失敗"
+        other: "有 %{count} 個錯誤導致 %{model} 儲存失敗"
+      body: "請檢查以下欄位："
   
   tasks:
     index:
