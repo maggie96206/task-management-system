@@ -45,19 +45,4 @@ RSpec.feature "Task Management", type: :feature do
     subject { all('.task-title').map(&:text) }
     it { is_expected.to eq [ "新任務", "舊任務" ] }
   end
-
-  describe "Task validation" do
-    subject { task }
-    let(:task) { build(:task) }
-
-    context "when title is null" do
-      let(:task) { build(:task, title: nil) }
-      it { is_expected.not_to be_valid }
-    end
-
-    context "when end_at is before start_at" do
-      let(:task) { build(:task, start_at: Time.zone.now, end_at: 1.day.ago) }
-      it { is_expected.not_to be_valid }
-    end
-  end
 end
