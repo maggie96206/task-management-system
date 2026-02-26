@@ -20,9 +20,9 @@ RSpec.feature "Task Management", type: :feature do
       it { is_expected.to have_content "新標題" }
       it { is_expected.to have_content "更新後的內容" }
       it { is_expected.to have_content "2026-02-21 10:00" }
-      it { is_expected.to have_content "2026-02-21 18:00" } # 檢查結束時間
-      it { is_expected.to have_content "1" }     # 檢查優先度
-      it { is_expected.to have_content "1" } # 檢查狀態
+      it { is_expected.to have_content "2026-02-21 18:00" }
+      it { is_expected.to have_content "1" }
+      it { is_expected.to have_content "1" }
     end
 
     context "when deleting a task" do

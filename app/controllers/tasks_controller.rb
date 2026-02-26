@@ -29,7 +29,7 @@ class TasksController < ApplicationController
     if @task.update(task_params)
       redirect_to tasks_path, notice: t("tasks.flash.update")
     else
-      render :edit
+      render :edit, status: :unprocessable_entity
     end
   end
 

@@ -2,9 +2,6 @@
 
   <% if task.errors.any? %>
     <div class="error-messages">
-      <%# <h2 style="color: red;"> %>
-        <%# <%= t('errors.template.header', count: task.errors.count, model: Task.model_name.human) %> 
-      <%# </h2> %>
       <ul>
         <% task.errors.full_messages.each do |message| %>
           <li style="color: red;"><%= message %></li>
@@ -16,38 +13,38 @@
 
 
   <div class="flex flex-col">
-    <%= f.label :title, t('activerecord.attributes.task.title'), class: "text-secondary" %>
+    <%= f.label :title, class: "text-secondary" %>
     <%= f.text_field :title, class: "input" %>
   </div>
 
   <div class="flex flex-col">
-    <%= f.label :content, t('activerecord.attributes.task.content'), class: "text-secondary" %>
+    <%= f.label :content, class: "text-secondary" %>
     <%= f.text_area :content, rows: 3, class: "input" %>
   </div>
 
   <div class="grid grid-cols-2 gap-4">
     <div>
-      <%= f.label :start_at, t('activerecord.attributes.task.start_at'), class: "text-secondary" %>
+      <%= f.label :start_at, class: "text-secondary" %>
       <%= f.datetime_field :start_at, class: "input text-sm" %>
     </div>
     <div>
-      <%= f.label :end_at, t('activerecord.attributes.task.end_at'), class: "text-secondary" %>
+      <%= f.label :end_at, class: "text-secondary" %>
       <%= f.datetime_field :end_at, class: "input text-sm" %>
     </div>
   </div>
 
   <div class="grid grid-cols-2 gap-4">
     <div>
-      <%= f.label :priority, t('activerecord.attributes.task.priority'), class: "text-secondary" %>
+      <%= f.label :priority %>
       <%= f.select :priority, [[t('tasks.priorities.high'), 1], [t('tasks.priorities.medium'), 2], [t('tasks.priorities.low'), 3]], {}, { class: "input" } %>
     </div>
     <div>
-      <%= f.label :status, t('activerecord.attributes.task.status'), class: "text-secondary" %>
+      <%= f.label :status, class: "text-secondary" %>
       <%= f.select :status, [[t('tasks.statuses.pending'), 0], [t('tasks.statuses.processing'), 1], [t('tasks.statuses.completed'), 2]], {}, { class: "input" } %>
     </div>
   </div>
 
   <div>
-    <%= f.submit t('tasks.button.submit'), class: "btn-primary" %>
+    <%= f.submit t('.submit'), class: "btn-primary" %>
   </div>
 <% end %>
