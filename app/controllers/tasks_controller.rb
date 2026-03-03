@@ -2,23 +2,23 @@ class TasksController < ApplicationController
     before_action :set_task, only: [ :show, :edit, :update, :destroy ]
 
   def index
-    @tasks = Task.all # 從資料庫撈出所有任務，交給 View 顯示
+    @tasks = Task.order(created_at: :desc)
   end
 
   def show
   end
 
   def new
-    @task = Task.new(start_at: Time.current)
+    @task = Task.new(start_at: Time.zone.now)
     @task.end_at = @task.start_at + 1.hour
   end
 
   def create
     @task = Task.new(task_params)
     if @task.save
-      redirect_to tasks_path, notice: "任務已成功建立！" # Flash 訊息
+      redirect_to tasks_path, notice: t("tasks.flash.create") # Flash 訊息
     else
-      render :new
+      render :new, status: :unprocessable_entity
     end
   end
 
@@ -27,15 +27,15 @@ class TasksController < ApplicationController
 
   def update
     if @task.update(task_params)
-      redirect_to tasks_path, notice: "任務已更新！"
+      redirect_to tasks_path, notice: t("tasks.flash.update")
     else
-      render :edit
+      render :edit, status: :unprocessable_entity
     end
   end
 
   def destroy
     @task.destroy
-    redirect_to tasks_path, notice: "任務已刪除！"
+    redirect_to tasks_path, notice: t("tasks.flash.delete")
   end
 
   private
