@@ -34,6 +34,8 @@ zh-TW:
       new_task: "新增任務"
       edit_task: "編輯列表"
       view_task: "任務詳情"
+      sort_end_at: "按結束時間排序"
+      sort_created_at: "按建立時間排序"
     form:
       submit: "送出任務"   
     priorities:

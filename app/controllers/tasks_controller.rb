@@ -2,7 +2,12 @@ class TasksController < ApplicationController
     before_action :set_task, only: [ :show, :edit, :update, :destroy ]
 
   def index
-    @tasks = Task.order(created_at: :desc)
+    # 判斷點擊了哪個排序連結，如果沒點，預設用建立時間排序
+    if params[:sort] == "end_at"
+      @tasks = Task.order(end_at: :asc)
+    else
+      @tasks = Task.order(created_at: :desc)
+    end
   end
 
   def show
