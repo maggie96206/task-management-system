@@ -5,6 +5,15 @@ class Task < ApplicationRecord
   # 結束時間不能早於開始時間
   validate :end_at_cannot_be_before_start_at
 
+  scope :sorted_by, ->(sort_option) {
+    case sort_option
+    when "end_at"
+      order(end_at: :asc)
+    else
+      order(created_at: :desc)
+    end
+  }
+
   private
 
   def end_at_cannot_be_before_start_at
