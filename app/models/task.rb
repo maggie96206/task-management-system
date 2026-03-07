@@ -14,6 +14,24 @@ class Task < ApplicationRecord
     end
   }
 
+  scope :by_title, ->(title) { where("title iLIKE ?", "%#{title}%") if title.present? }
+
+  scope :by_status, ->(status) { where(status: status) if status.present? }
+
+  # 狀態
+  enum :status, { pending: 0, in_progress: 1, completed: 2 }, default: :pending
+
+  def human_status
+    I18n.t("enums.task.status.#{status}")
+  end
+
+  # 優先度
+  enum :priority, { low: 3, normal: 2, high: 1 }, default: :low
+
+  def human_priority
+    I18n.t("enums.task.priority.#{priority}")
+  end
+
   private
 
   def end_at_cannot_be_before_start_at

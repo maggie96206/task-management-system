@@ -4,7 +4,7 @@ FactoryBot.define do
     content { Faker::Lorem.paragraph }
     start_at { Time.zone.now }
     end_at { |task| task.start_at + 1.hour }
-    priority { 3 }
-    status { 0 }
+    priority { "low" }
+    status { "pending" }
   end
 end

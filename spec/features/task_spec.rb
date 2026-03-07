@@ -12,7 +12,7 @@ RSpec.feature "Task Management", type: :feature do
         fill_in "內容", with: "更新後的內容"
         fill_in "開始時間", with: "2026-02-21T10:00"
         fill_in "結束時間", with: "2026-02-21T18:00"
-        select "1 - 高", from: "優先度"
+        select "高", from: "優先度"
         select "進行中", from: "狀態"
         click_button "送出任務"
       end
@@ -21,8 +21,8 @@ RSpec.feature "Task Management", type: :feature do
       it { is_expected.to have_content "更新後的內容" }
       it { is_expected.to have_content "2026-02-21 10:00" }
       it { is_expected.to have_content "2026-02-21 18:00" }
-      it { is_expected.to have_content "1" }
-      it { is_expected.to have_content "1" }
+      it { is_expected.to have_content "高" }
+      it { is_expected.to have_content "進行中" }
     end
 
     context "when deleting a task" do
@@ -54,5 +54,24 @@ RSpec.feature "Task Management", type: :feature do
 
     subject { all('.task-title').map(&:text) }
     it { is_expected.to eq [ "早結束任務", "晚結束任務" ] }
+  end
+
+  describe "Search task", type: :feature do
+    let!(:task_target) { create(:task, title: "重要會議", status: :pending) }
+    let!(:task_other) { create(:task, title: "吃午餐", status: :completed) }
+
+    context "when search by title and selected status" do
+      subject { page }
+
+      before do
+        visit tasks_path
+        fill_in "搜尋任務標題", with: "會議"
+        select "待處理", from: "status"
+        click_button "搜尋"
+      end
+
+      it { is_expected.to have_content "重要會議" }
+      it { is_expected.not_to have_content "吃午餐" }
+    end
   end
 end

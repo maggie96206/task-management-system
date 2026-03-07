@@ -35,12 +35,18 @@
 
   <div class="grid grid-cols-2 gap-4">
     <div>
-      <%= f.label :priority %>
-      <%= f.select :priority, [[t('tasks.priorities.high'), 1], [t('tasks.priorities.medium'), 2], [t('tasks.priorities.low'), 3]], {}, { class: "input" } %>
+      <%= f.label :priority, class: "text-secondary" %>
+      <%= f.select :priority, 
+        Task.priorities.keys.map { |s| [I18n.t("enums.task.priority.#{s}"), s] }, 
+        {}, 
+        { class: "input" } %>
     </div>
     <div>
       <%= f.label :status, class: "text-secondary" %>
-      <%= f.select :status, [[t('tasks.statuses.pending'), 0], [t('tasks.statuses.processing'), 1], [t('tasks.statuses.completed'), 2]], {}, { class: "input" } %>
+      <%= f.select :status, 
+        Task.statuses.keys.map { |s| [I18n.t("enums.task.status.#{s}"), s] }, 
+        {}, 
+        { class: "input" } %>
     </div>
   </div>
 
