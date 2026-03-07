@@ -36,17 +36,11 @@
   <div class="grid grid-cols-2 gap-4">
     <div>
       <%= f.label :priority, class: "text-secondary" %>
-      <%= f.select :priority, 
-        Task.priorities.keys.map { |s| [I18n.t("enums.task.priority.#{s}"), s] }, 
-        {}, 
-        { class: "input" } %>
+      <%= f.select :priority, task_priority_options, {}, { class: "input" } %>
     </div>
     <div>
       <%= f.label :status, class: "text-secondary" %>
-      <%= f.select :status, 
-        Task.statuses.keys.map { |s| [I18n.t("enums.task.status.#{s}"), s] }, 
-        {}, 
-        { class: "input" } %>
+      <%= f.select :status, task_status_options, {}, { class: "input" } %>
     </div>
   </div>
 
