@@ -2,7 +2,7 @@ class TasksController < ApplicationController
     before_action :set_task, only: [ :show, :edit, :update, :destroy ]
 
   def index
-    @tasks = Task.order(created_at: :desc)
+    @tasks = Task.sorted_by(query_params[:sort])
   end
 
   def show
@@ -47,5 +47,9 @@ class TasksController < ApplicationController
   def task_params
     # 允許 Migration 定義過的欄位
     params.require(:task).permit(:title, :content, :start_at, :end_at, :priority, :status)
+  end
+
+  def query_params
+    params.permit(:sort)
   end
 end

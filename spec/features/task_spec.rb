@@ -36,7 +36,7 @@ RSpec.feature "Task Management", type: :feature do
     end
   end
 
-  describe "Task sorting" do
+  describe "Task sorted by created_at" do
     let!(:old_task) { create(:task, title: "舊任務", created_at: 1.day.ago) }
     let!(:new_task) { create(:task, title: "新任務", created_at: Time.zone.now) }
 
@@ -44,5 +44,15 @@ RSpec.feature "Task Management", type: :feature do
 
     subject { all('.task-title').map(&:text) }
     it { is_expected.to eq [ "新任務", "舊任務" ] }
+  end
+
+  describe "Task sorted by end_at" do
+    let!(:earlier_task) { create(:task, title: "早結束任務", end_at: 1.day.from_now) }
+    let!(:later_task) { create(:task, title: "晚結束任務", end_at: 2.day.from_now) }
+
+    before { visit tasks_path(sort: "end_at") }
+
+    subject { all('.task-title').map(&:text) }
+    it { is_expected.to eq [ "早結束任務", "晚結束任務" ] }
   end
 end
