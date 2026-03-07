@@ -36,11 +36,11 @@
   <div class="grid grid-cols-2 gap-4">
     <div>
       <%= f.label :priority, class: "text-secondary" %>
-      <%= f.select :priority, task_priority_options, {}, { class: "input" } %>
+      <%= f.select :priority, task_enum_options(:priority), {}, { class: "input" } %>
     </div>
     <div>
       <%= f.label :status, class: "text-secondary" %>
-      <%= f.select :status, task_status_options, {}, { class: "input" } %>
+      <%= f.select :status, task_enum_options(:status), {}, { class: "input" } %>
     </div>
   </div>
 

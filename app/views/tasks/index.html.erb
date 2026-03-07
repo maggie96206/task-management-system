@@ -5,7 +5,7 @@
   <%= f.text_field :title, placeholder: t('.search_title'), value: params[:title] %>
 
   <%= f.select :status, 
-               Task.statuses.keys.map { |s| [I18n.t("enums.task.status.#{s}"), s] }, 
+               task_enum_options(:status), 
                { include_blank: t('.search_status'), selected: params[:status] } %>
 
   <%= f.submit t('common.search') %>
