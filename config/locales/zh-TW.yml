@@ -45,6 +45,9 @@ zh-TW:
       view_task: "任務詳情"
       sort_end_at: "按結束時間排序"
       sort_created_at: "按建立時間排序"
+      sort_priority: "按優先度排序"
+      search_title: "搜尋任務標題"
+      search_status: "全部狀態"
     form:
       submit: "送出任務"   
     flash:
@@ -57,5 +60,6 @@ zh-TW:
       edit: "編輯"
       delete: "刪除"
       confirm_delete: "確定要刪除嗎？"
+      search: "搜尋"
       return: "返回"
       quit: "取消"

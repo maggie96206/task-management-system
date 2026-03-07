@@ -9,6 +9,8 @@ class Task < ApplicationRecord
     case sort_option
     when "end_at"
       order(end_at: :asc)
+    when "priority"
+      order(priority: :asc)
     else
       order(created_at: :desc)
     end

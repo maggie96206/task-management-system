@@ -56,8 +56,18 @@ RSpec.feature "Task Management", type: :feature do
     it { is_expected.to eq [ "早結束任務", "晚結束任務" ] }
   end
 
+  describe "Task sorted by priority" do
+    let!(:priority_low_task) { create(:task, title: "低優先度任務", priority: "low") }
+    let!(:priority_high_task) { create(:task, title: "高優先度任務", priority: "high") }
+
+    before { visit tasks_path(sort: "priority") }
+
+    subject { all('.task-title').map(&:text) }
+    it { is_expected.to eq [ "高優先度任務", "低優先度任務" ] }
+  end
+
   describe "Search task", type: :feature do
-    let!(:task_target) { create(:task, title: "重要會議", status: :pending) }
+    let!(:task_target) { create(:task, title: "估時會議", status: :pending) }
     let!(:task_other) { create(:task, title: "吃午餐", status: :completed) }
 
     context "when search by title and selected status" do
@@ -70,7 +80,7 @@ RSpec.feature "Task Management", type: :feature do
         click_button "搜尋"
       end
 
-      it { is_expected.to have_content "重要會議" }
+      it { is_expected.to have_content "估時會議" }
       it { is_expected.not_to have_content "吃午餐" }
     end
   end
