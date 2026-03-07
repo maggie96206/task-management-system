@@ -2,7 +2,6 @@ class TasksController < ApplicationController
     before_action :set_task, only: [ :show, :edit, :update, :destroy ]
 
   def index
-    # @tasks = Task.sorted_by(query_params[:sort])
     @tasks = Task.all
                .by_title(query_params[:title])
                .by_status(query_params[:status])
