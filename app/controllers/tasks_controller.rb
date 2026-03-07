@@ -2,7 +2,9 @@ class TasksController < ApplicationController
     before_action :set_task, only: [ :show, :edit, :update, :destroy ]
 
   def index
-    @tasks = Task.sorted_by(query_params[:sort])
+    @tasks = Task.by_title(query_params[:title])
+                 .by_status(query_params[:status])
+                 .sorted_by(query_params[:sort])
   end
 
   def show
@@ -50,6 +52,6 @@ class TasksController < ApplicationController
   end
 
   def query_params
-    params.permit(:sort)
+    params.permit(:sort, :title, :status)
   end
 end

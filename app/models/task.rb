@@ -6,13 +6,31 @@ class Task < ApplicationRecord
   validate :end_at_cannot_be_before_start_at
 
   scope :sorted_by, ->(sort_option) {
-    case sort_option
-    when "end_at"
-      order(end_at: :asc)
+    if sort_option.in? %w[end_at priority]
+      order(sort_option => :asc)
     else
       order(created_at: :desc)
     end
   }
+
+
+  scope :by_title, ->(title) { title.present? ? where("title iLIKE ?", "%#{title}%") : all }
+
+  scope :by_status, ->(status) { status.present? ? where(status: status) : all }
+
+  # 狀態
+  enum :status, { pending: 0, in_progress: 1, completed: 2 }, default: :pending
+
+  def human_status
+    I18n.t("enums.task.status.#{status}")
+  end
+
+  # 優先度
+  enum :priority, { low: 3, normal: 2, high: 1 }, default: :low
+
+  def human_priority
+    I18n.t("enums.task.priority.#{priority}")
+  end
 
   private
 

@@ -35,12 +35,12 @@
 
   <div class="grid grid-cols-2 gap-4">
     <div>
-      <%= f.label :priority %>
-      <%= f.select :priority, [[t('tasks.priorities.high'), 1], [t('tasks.priorities.medium'), 2], [t('tasks.priorities.low'), 3]], {}, { class: "input" } %>
+      <%= f.label :priority, class: "text-secondary" %>
+      <%= f.select :priority, task_enum_options(:priority), {}, { class: "input" } %>
     </div>
     <div>
       <%= f.label :status, class: "text-secondary" %>
-      <%= f.select :status, [[t('tasks.statuses.pending'), 0], [t('tasks.statuses.processing'), 1], [t('tasks.statuses.completed'), 2]], {}, { class: "input" } %>
+      <%= f.select :status, task_enum_options(:status), {}, { class: "input" } %>
     </div>
   </div>
 

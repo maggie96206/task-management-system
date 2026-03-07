@@ -1,9 +1,20 @@
 <h1 class="mb-4"><%= t('.title') %></h1>
 <%= link_to t('.new_task'), new_task_path, class: "btn-primary" %>
 
+<%= form_with url: tasks_path, method: :get, local: true do |f| %>
+  <%= f.text_field :title, placeholder: t('.search_title'), value: params[:title] %>
+
+  <%= f.select :status, 
+               task_enum_options(:status), 
+               { include_blank: t('.search_status'), selected: params[:status] } %>
+
+  <%= f.submit t('common.search') %>
+<% end %>
+
 <div class="sorting-links">
   <%= link_to t('.sort_created_at'), tasks_path, class: "btn-primary" %>
   <%= link_to t('.sort_end_at'), tasks_path(sort: "end_at"), class: "btn-primary" %>
+  <%= link_to t('.sort_priority'), tasks_path(sort: "priority"), class: "btn-primary" %>
 </div>
 
 <table>
@@ -26,8 +37,8 @@
         <td><%= task.content %></td>
         <td><%= task.start_at %></td>
         <td><%= task.end_at %></td>
-        <td><%= task.priority %></td>
-        <td><%= task.status %></td>
+        <td><%= task.human_priority %></td>
+        <td><%= task.human_status %></td>
         <td>
             <%= link_to t('common.view'), task_path(task), class: "btn-primary" %>
             <%= link_to t('common.edit'), edit_task_path(task), class: "btn-primary" %>

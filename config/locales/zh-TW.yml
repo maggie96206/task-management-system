@@ -20,7 +20,16 @@ zh-TW:
               blank: "不能為空白"
             end_at:
               before_start_at: "須比開始時間晚"  
-  
+  enums:
+    task:
+      status:
+        pending: "待處理"
+        in_progress: "進行中"
+        completed: "已完成"
+      priority:
+        low: "低"
+        normal: "中"
+        high: "高"
   errors:
     template:
       header:
@@ -36,16 +45,11 @@ zh-TW:
       view_task: "任務詳情"
       sort_end_at: "按結束時間排序"
       sort_created_at: "按建立時間排序"
+      sort_priority: "按優先度排序"
+      search_title: "搜尋任務標題"
+      search_status: "全部狀態"
     form:
       submit: "送出任務"   
-    priorities:
-      high: "1 - 高"
-      medium: "2 - 中"
-      low: "3 - 低"
-    statuses:
-      pending: "待處理"
-      processing: "進行中"
-      completed: "已完成"
     flash:
       create: "任務已成功建立！"
       update: "任務已更新成功！"
@@ -56,5 +60,6 @@ zh-TW:
       edit: "編輯"
       delete: "刪除"
       confirm_delete: "確定要刪除嗎？"
+      search: "搜尋"
       return: "返回"
       quit: "取消"
