@@ -1,6 +1,10 @@
 @import "tailwindcss";
 
 @layer components {
+    .text-primary {
+        @apply block text-[32px] font-bold text-gray-700;
+    }
+
     .text-secondary {
         @apply block text-sm font-medium text-gray-700 mb-1;
     }

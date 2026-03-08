@@ -1,50 +1,110 @@
-<h1 class="mb-4"><%= t('.title') %></h1>
-<%= link_to t('.new_task'), new_task_path, class: "btn-primary" %>
+<div class="w-full h-full flex flex-col items-center py-5 px-20">
 
-<%= form_with url: tasks_path, method: :get, local: true do |f| %>
-  <%= f.text_field :title, placeholder: t('.search_title'), value: params[:title] %>
+  <h1 class="text-primary"><%= t('.title') %></h1>
 
-  <%= f.select :status, 
-               task_enum_options(:status), 
-               { include_blank: t('.search_status'), selected: params[:status] } %>
+  <div class="w-full mb-2">
+    <%= link_to t('.new_task'), new_task_path, class: "btn-primary" %>
+  </div>
 
-  <%= f.submit t('common.search') %>
-<% end %>
+  <div class="w-full flex justify-between mb-4">
+    <div class="sorting-links">
+      <%= link_to t('.sort_created_at'), tasks_path, class: "btn-primary" %>
+      <%= link_to t('.sort_end_at'), tasks_path(sort: "end_at"), class: "btn-primary" %>
+      <%= link_to t('.sort_priority'), tasks_path(sort: "priority"), class: "btn-primary" %>
+    </div>
 
-<div class="sorting-links">
-  <%= link_to t('.sort_created_at'), tasks_path, class: "btn-primary" %>
-  <%= link_to t('.sort_end_at'), tasks_path(sort: "end_at"), class: "btn-primary" %>
-  <%= link_to t('.sort_priority'), tasks_path(sort: "priority"), class: "btn-primary" %>
+    <%= form_with url: tasks_path, method: :get, local: true , class: "flex gap-4 items-center" do |f| %>
+      <%= f.text_field :title, placeholder: t('.search_title'), class: "border border-[#4E4E9A] p-2 rounded-2xl", value: params[:title] %>
+
+      <%= f.select :status, 
+                  task_enum_options(:status), 
+                  { include_blank: t('.search_status'), selected: params[:status] },
+                  class: "block rounded-md sm:text-sm" %>
+
+      <%= f.submit t('common.search'),
+          class: "btn-primary" %>
+    <% end %>
+  </div>
+  
+
+  
+
+  <table class="w-full border-collapse bg-white text-left text-sm text-gray-500">
+    <thead>
+      <tr>
+        <th><%= Task.human_attribute_name(:title) %></th>
+        <th><%= Task.human_attribute_name(:content) %></th>
+        <th><%= Task.human_attribute_name(:start_at) %></th>
+        <th><%= Task.human_attribute_name(:end_at) %></th>
+        <th><%= Task.human_attribute_name(:priority) %></th>
+        <th><%= Task.human_attribute_name(:status) %></th>
+        <th></th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @tasks.each do |task| %>
+        <tr class="task-item">
+          <td class="task-title"><%= task.title %></td>
+          <td><%= task.content %></td>
+          <td><%= task.start_at %></td>
+          <td><%= task.end_at %></td>
+          <td><%= task.human_priority %></td>
+          <td><%= task.human_status %></td>
+          <td>
+              <%= link_to t('common.view'), task_path(task), class: "btn-primary" %>
+              <%= link_to t('common.edit'), edit_task_path(task), class: "btn-primary" %>
+              <%= link_to t('common.delete'), task_path(task), data: { turbo_method: :delete, turbo_confirm: t('common.confirm_delete') }, class: "btn-primary" %>
+          </td>
+      </tr>
+      <% end %>
+    </tbody>
+  </table>
 </div>
 
-<table>
-  <thead>
-    <tr>
-      <th><%= Task.human_attribute_name(:title) %></th>
-      <th><%= Task.human_attribute_name(:content) %></th>
-      <th><%= Task.human_attribute_name(:start_at) %></th>
-      <th><%= Task.human_attribute_name(:end_at) %></th>
-      <th><%= Task.human_attribute_name(:priority) %></th>
-      <th><%= Task.human_attribute_name(:status) %></th>
-      <th></th>
-    </tr>
-  </thead>
+<%# 分頁按鈕 %>
 
-  <tbody>
-    <% @tasks.each do |task| %>
-      <tr class="task-item">
-        <td class="task-title"><%= task.title %></td>
-        <td><%= task.content %></td>
-        <td><%= task.start_at %></td>
-        <td><%= task.end_at %></td>
-        <td><%= task.human_priority %></td>
-        <td><%= task.human_status %></td>
-        <td>
-            <%= link_to t('common.view'), task_path(task), class: "btn-primary" %>
-            <%= link_to t('common.edit'), edit_task_path(task), class: "btn-primary" %>
-            <%= link_to t('common.delete'), task_path(task), data: { turbo_method: :delete, turbo_confirm: t('common.confirm_delete') }, class: "btn-primary" %>
-        </td>
-    </tr>
-    <% end %>
-  </tbody>
-</table>
+<div class="flex items-center justify-between border-t border-gray-200 bg-white px-4 py-3 sm:px-6 mt-4">
+  <div class="hidden sm:flex sm:flex-1 sm:items-center sm:justify-between">
+    <div>
+      <p class="text-sm text-gray-700">
+        顯示第 <span class="font-medium"><%= @pagy.from %></span> 
+        至 <span class="font-medium"><%= @pagy.to %></span> 筆，
+        共 <span class="font-medium"><%= @pagy.count %></span> 筆結果
+      </p>
+    </div>
+    
+    <div>
+      <nav class="isolate inline-flex -space-x-px rounded-md shadow-sm">
+        <%# 上一頁 %>
+        <% if @pagy.prev %>
+          <a href="<%= pagy_url_for(@pagy, @pagy.prev) %>" class="relative inline-flex items-center rounded-l-md px-2 py-2 text-gray-400 ring-1 ring-inset ring-gray-300 hover:bg-gray-50"> < </a>
+        <% end %>
+
+        <%# 頁碼迴圈 %>
+        <% @pagy.series.each do |item| %>
+          <% if item.is_a?(Integer) %>
+            <%# 一般數字頁碼 %>
+            <a href="<%= pagy_url_for(@pagy, item) %>" class="relative inline-flex items-center px-4 py-2 text-sm font-semibold text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-50">
+              <%= item %>
+            </a>
+          <% elsif item.is_a?(String) %>
+            <%# 當前頁面 %>
+            <span class="relative z-10 inline-flex items-center bg-[#7B7BD8] px-4 py-2 text-sm font-semibold text-white">
+              <%= item %>
+            </span>
+          <% elsif item == :gap %>
+            <%# 省略符號 ... %>
+            <span class="relative inline-flex items-center px-4 py-2 text-sm font-semibold text-gray-700 ring-1 ring-inset ring-gray-300">...</span>
+          <% end %>
+        <% end %>
+
+        <%# 下一頁 %>
+        <% if @pagy.next %>
+          <a href="<%= pagy_url_for(@pagy, @pagy.next) %>" class="relative inline-flex items-center rounded-r-md px-2 py-2 text-gray-400 ring-1 ring-inset ring-gray-300 hover:bg-gray-50"> > </a>
+        <% end %>
+      </nav>
+    </div>
+  </div>
+</div>
+
