@@ -1,38 +1,44 @@
-<h1 class="mb-4"><%= t('tasks.index.view_task') %></h1>
+<div class="page-container items-center gap-y-4">
+    <div class="w-full flex flex-col items-center">
+        <h1 class="text-primary"><%= t('tasks.index.view_task') %></h1>
+    </div>
 
-<div class="space-y-6">
-    <p>
-    <strong><%= Task.human_attribute_name(:title) %>：</strong>
-    <%= @task.title %>
-    </p>
+    <div class="space-y-6">
+        <p>
+        <strong><%= Task.human_attribute_name(:title) %>：</strong>
+        <%= @task.title %>
+        </p>
 
-    <p>
-    <strong><%= Task.human_attribute_name(:content) %>：</strong>
-    <%= @task.content %>
-    </p>
+        <p>
+        <strong><%= Task.human_attribute_name(:content) %>：</strong>
+        <%= @task.content %>
+        </p>
 
-    <p>
-    <strong><%= Task.human_attribute_name(:start_at) %>：</strong>
-    <%= @task.start_at %>
-    </p>
+        <p>
+        <strong><%= Task.human_attribute_name(:start_at) %>：</strong>
+        <%= @task.start_at %>
+        </p>
 
-    <p>
-    <strong><%= Task.human_attribute_name(:end_at) %>：</strong>
-    <%= @task.end_at %>
-    </p>
+        <p>
+        <strong><%= Task.human_attribute_name(:end_at) %>：</strong>
+        <%= @task.end_at %>
+        </p>
 
-    <p>
-    <strong><%= Task.human_attribute_name(:priority) %>：</strong>
-    <%= @task.human_priority %>
-    </p>
+        <p>
+        <strong><%= Task.human_attribute_name(:priority) %>：</strong>
+        <%= @task.human_priority %>
+        </p>
 
-    <p>
-    <strong><%= Task.human_attribute_name(:status) %>：</strong>
-    <%= @task.human_status %>
-    </p>
+        <p>
+        <strong><%= Task.human_attribute_name(:status) %>：</strong>
+        <%= @task.human_status %>
+        </p>
+    </div>
+
+
+    <div class="w-full flex flex-row gap-x-4 justify-center">
+      <%= link_to t('common.edit'), edit_task_path(@task) , class: "btn-primary" %>
+      <%= link_to t('common.return'), tasks_path , class: "btn-primary" %>
+    </div>
+   
 </div>
-
-
-
-<%= link_to t('common.edit'), edit_task_path(@task) , class: "btn-primary" %>
-<%= link_to t('common.return'), tasks_path , class: "btn-primary" %>

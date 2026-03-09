@@ -1,50 +1,53 @@
-<%= form_with(model: task, local: true, class: "space-y-6 max-w-lg") do |f| %>
+<div class="w-full h-full flex flex-col py-5 px-20 items-center">
+  <%= form_with(model: task, local: true, class: "space-y-6 max-w-lg") do |f| %>
 
-  <% if task.errors.any? %>
-    <div class="error-messages">
-      <ul>
-        <% task.errors.full_messages.each do |message| %>
-          <li style="color: red;"><%= message %></li>
-        <% end %>
-      </ul>
+    <% if task.errors.any? %>
+      <div class="error-messages">
+        <ul>
+          <% task.errors.full_messages.each do |message| %>
+            <li style="color: red;"><%= message %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+
+
+    <div class="flex flex-col">
+      <%= f.label :title, class: "text-secondary" %>
+      <%= f.text_field :title, class: "input" %>
+    </div>
+
+    <div class="flex flex-col">
+      <%= f.label :content, class: "text-secondary" %>
+      <%= f.text_area :content, rows: 3, class: "input" %>
+    </div>
+
+    <div class="grid grid-cols-2 gap-4">
+      <div>
+        <%= f.label :start_at, class: "text-secondary" %>
+        <%= f.datetime_field :start_at, class: "input text-sm" %>
+      </div>
+      <div>
+        <%= f.label :end_at, class: "text-secondary" %>
+        <%= f.datetime_field :end_at, class: "input text-sm" %>
+      </div>
+    </div>
+
+    <div class="grid grid-cols-2 gap-4">
+      <div>
+        <%= f.label :priority, class: "text-secondary" %>
+        <%= f.select :priority, task_enum_options(:priority), {}, { class: "input" } %>
+      </div>
+      <div>
+        <%= f.label :status, class: "text-secondary" %>
+        <%= f.select :status, task_enum_options(:status), {}, { class: "input" } %>
+      </div>
+    </div>
+
+    <div class="w-full flex flex-row gap-x-4 justify-center">
+      <%= f.submit t('.submit'), class: "btn-primary" %>
+      <%= link_to t('common.quit'), tasks_path, class: "btn-primary" %>
     </div>
   <% end %>
-
-
-
-  <div class="flex flex-col">
-    <%= f.label :title, class: "text-secondary" %>
-    <%= f.text_field :title, class: "input" %>
-  </div>
-
-  <div class="flex flex-col">
-    <%= f.label :content, class: "text-secondary" %>
-    <%= f.text_area :content, rows: 3, class: "input" %>
-  </div>
-
-  <div class="grid grid-cols-2 gap-4">
-    <div>
-      <%= f.label :start_at, class: "text-secondary" %>
-      <%= f.datetime_field :start_at, class: "input text-sm" %>
-    </div>
-    <div>
-      <%= f.label :end_at, class: "text-secondary" %>
-      <%= f.datetime_field :end_at, class: "input text-sm" %>
-    </div>
-  </div>
-
-  <div class="grid grid-cols-2 gap-4">
-    <div>
-      <%= f.label :priority, class: "text-secondary" %>
-      <%= f.select :priority, task_enum_options(:priority), {}, { class: "input" } %>
-    </div>
-    <div>
-      <%= f.label :status, class: "text-secondary" %>
-      <%= f.select :status, task_enum_options(:status), {}, { class: "input" } %>
-    </div>
-  </div>
-
-  <div>
-    <%= f.submit t('.submit'), class: "btn-primary" %>
-  </div>
-<% end %>
+</div>

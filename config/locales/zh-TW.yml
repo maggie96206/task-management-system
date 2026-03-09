@@ -48,6 +48,11 @@ zh-TW:
       sort_priority: "按優先度排序"
       search_title: "搜尋任務標題"
       search_status: "全部狀態"
+    pagination:
+      text1: "顯示第"
+      text2: "筆，"
+      text3: "共"
+      text4: "筆結果"
     form:
       submit: "送出任務"   
     flash:
