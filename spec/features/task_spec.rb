@@ -19,8 +19,8 @@ RSpec.feature "Task Management", type: :feature do
 
       it { is_expected.to have_content "新標題" }
       it { is_expected.to have_content "更新後的內容" }
-      it { is_expected.to have_content "2026-02-21 10:00" }
-      it { is_expected.to have_content "2026-02-21 18:00" }
+      it { is_expected.to have_content "2026/02/21 10:00" }
+      it { is_expected.to have_content "2026/02/21 18:00" }
       it { is_expected.to have_content "高" }
       it { is_expected.to have_content "進行中" }
     end

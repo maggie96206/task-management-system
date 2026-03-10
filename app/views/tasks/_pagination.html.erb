@@ -1,0 +1,39 @@
+<div class="flex items-center justify-between border-t border-gray-200 bg-white px-4 py-3 sm:px-6 mt-4">
+  <div class="hidden sm:flex sm:flex-1 sm:items-center sm:justify-between">
+    <div>
+      <p class="text-sm text-gray-700">
+        <%= t(".text1") %> <span class="font-medium"><%= @pagy.from %></span> 
+        ~ <span class="font-medium"><%= @pagy.to %></span> <%= t(".text2") %>
+        <%= t(".text3") %> <span class="font-medium"><%= @pagy.count %></span> <%= t(".text4") %>
+      </p>
+    </div>
+    
+    <div>
+      <nav class="isolate inline-flex -space-x-px rounded-md shadow-sm">
+        <%# 上一頁 %>
+        <% if @pagy.prev %>
+          <a href="<%= pagy_url_for(@pagy, @pagy.prev) %>" class="relative inline-flex items-center rounded-l-md px-2 py-2 text-gray-400 ring-1 ring-inset ring-gray-300 hover:bg-gray-50"> < </a>
+        <% end %>
+
+        <% @pagy.series.each do |item| %>
+          <% if item.is_a?(Integer) %>
+            <a href="<%= pagy_url_for(@pagy, item) %>" class="relative inline-flex items-center px-4 py-2 text-sm font-semibold text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-50">
+              <%= item %>
+            </a>
+          <% elsif item.is_a?(String) %>
+            <span class="relative z-10 inline-flex items-center bg-[#7B7BD8] px-4 py-2 text-sm font-semibold text-white">
+              <%= item %>
+            </span>
+          <% elsif item == :gap %>
+            <span class="relative inline-flex items-center px-4 py-2 text-sm font-semibold text-gray-700 ring-1 ring-inset ring-gray-300">...</span>
+          <% end %>
+        <% end %>
+
+        <%# 下一頁 %>
+        <% if @pagy.next %>
+          <a href="<%= pagy_url_for(@pagy, @pagy.next) %>" class="relative inline-flex items-center rounded-r-md px-2 py-2 text-gray-400 ring-1 ring-inset ring-gray-300 hover:bg-gray-50"> > </a>
+        <% end %>
+      </nav>
+    </div>
+  </div>
+</div>

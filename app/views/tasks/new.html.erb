@@ -1,3 +1,5 @@
-<h1 class="mb-4"><%= t('tasks.index.new_task') %></h1>
+<div class="w-full flex flex-col items-center mt-5">
+    <h1 class="text-primary"><%= t('tasks.index.new_task') %></h1>
+</div>
 <%= render "form", task: @task %>
-<%= link_to t('common.return'), tasks_path, class: "btn-primary" %>
+
