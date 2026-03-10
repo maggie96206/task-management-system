@@ -40,10 +40,9 @@
   <%# 任務卡片 %>
   <div class="mt-6">
     <% if @tasks.any? %>
-      <%# 這行會自動對 @tasks 集合中的每個元素渲染 _task.html.erb %>
       <%= render @tasks %>
     <% else %>
-      <div class="text-center py-20 text-gray-400">目前沒有任何任務</div>
+      <div class="text-center py-20 text-gray-400"><%= t('.no_task') %></div>
     <% end %>
   </div>
 </div>
