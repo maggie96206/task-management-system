@@ -2,6 +2,7 @@ zh-TW:
   activerecord:
     models:
       task: "任務"
+      users: "使用者"
     attributes:
       task:
         title: "任務標題"
@@ -10,6 +11,11 @@ zh-TW:
         end_at: "結束時間"
         priority: "優先度"
         status: "狀態"
+      user:
+        name: "名稱"
+        email: "電子信箱"
+        password: "密碼"
+        password_confirmation: "密碼確認"
     errors:
       messages:
         blank: "不能為空白"
@@ -20,6 +26,12 @@ zh-TW:
               blank: "不能為空白"
             end_at:
               before_start_at: "須比開始時間晚"  
+        user:
+          attributes:
+            email:
+              taken: "已被註冊"
+            password_confirmation:
+              confirmation: "不一致"    
   enums:
     task:
       status:
@@ -61,6 +73,14 @@ zh-TW:
       update: "任務已更新成功！"
       delete: "任務已刪除！"
 
+  sessions:
+    please_log_in: "請先登入"
+    log_in_success: "登入成功"
+    sign_up_success: "歡迎！註冊成功"
+    log_in_fail: "密碼或信箱錯誤"
+    logged_out: "已登出"
+    welcome: "歡迎，"
+
   common:
       view: "檢視"
       edit: "編輯"
@@ -69,3 +89,6 @@ zh-TW:
       search: "搜尋"
       return: "返回"
       quit: "取消"
+      sign_up: "註冊"
+      log_in: "登入"
+      log_out: "登出"

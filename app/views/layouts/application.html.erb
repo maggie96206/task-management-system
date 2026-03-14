@@ -23,6 +23,14 @@
     <%= javascript_importmap_tags %>
   </head>
 
+  <% if logged_in? %>
+    <%= link_to t("common.log_out"), logout_path, data: { turbo_method: :delete }, class: "btn-primary" %>
+    <span><%= t("sessions.welcome") %><%= current_user.name %></span>
+  <% else %>
+    <%= link_to t("common.sign_up"), signup_path, class: "btn-primary" %>
+    <%= link_to t("common.log_in"), login_path, class: "btn-primary" %>
+  <% end %>
+
   <body>
 
     <% flash.each do |type, msg| %>

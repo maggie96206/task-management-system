@@ -1,4 +1,6 @@
 class Task < ApplicationRecord
+  belongs_to :user
+
   # 標題不可空白
   validates :title, presence: true
 

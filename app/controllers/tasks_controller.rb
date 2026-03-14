@@ -1,11 +1,14 @@
 class TasksController < ApplicationController
-    before_action :set_task, only: [ :show, :edit, :update, :destroy ]
+  before_action :set_task, only: [ :show, :edit, :update, :destroy ]
+  before_action :authenticate_user! # 確保進來前都要登入
 
   def index
-    @pagy, @tasks = pagy(Task.by_title(query_params[:title])
+    @pagy, @tasks = pagy(@current_user.tasks.includes(:user)
+                    .by_title(query_params[:title])
                     .by_status(query_params[:status])
                     .sorted_by(query_params[:sort]))
   end
+
 
   def show
   end
@@ -16,9 +19,10 @@ class TasksController < ApplicationController
   end
 
   def create
-    @task = Task.new(task_params)
+    @task = @current_user.tasks.build(task_params)
+
     if @task.save
-      redirect_to tasks_path, notice: t("tasks.flash.create") # Flash 訊息
+      redirect_to tasks_path, notice: t("tasks.flash.create")
     else
       render :new, status: :unprocessable_entity
     end
@@ -43,7 +47,7 @@ class TasksController < ApplicationController
   private
 
   def set_task
-    @task = Task.find(params[:id])
+    @task = current_user.tasks.find(params[:id])
   end
 
   def task_params

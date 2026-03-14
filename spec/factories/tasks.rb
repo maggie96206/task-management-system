@@ -6,5 +6,6 @@ FactoryBot.define do
     end_at { |task| task.start_at + 1.hour }
     priority { "low" }
     status { "pending" }
+    association :user
   end
 end

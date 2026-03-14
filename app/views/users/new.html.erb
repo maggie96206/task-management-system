@@ -1,0 +1,37 @@
+<div class="w-full h-full flex flex-col py-5 px-20 items-center">
+  <h1 class="text-2xl font-bold mb-4"><%= t("common.sign_up") %></h1>
+
+  <%= form_with(model: @user, local: true, class: "space-y-6 w-full max-w-lg") do |f| %>
+    <%# 驗證失敗錯誤訊息 %>
+    <% if @user.errors.any? %>
+      <div class="text-red-500">
+        <ul><% @user.errors.full_messages.each do |msg| %><li><%= msg %></li><% end %></ul>
+      </div>
+    <% end %>
+
+    <div class="flex flex-col">
+      <%= f.label :name, class: "text-secondary" %>
+      <%= f.text_field :name, class: "input" %>
+    </div>
+
+    <div class="flex flex-col">
+      <%= f.label :email, class: "text-secondary" %>
+      <%= f.email_field :email, class: "input" %> <%# 改用 email_field %>
+    </div>
+
+    <div class="flex flex-col">
+      <%= f.label :password, class: "text-secondary" %>
+      <%= f.password_field :password, class: "input" %> <%# 絕對要用 password_field %>
+    </div>
+
+     <div class="flex flex-col">
+      <%= f.label :password_confirmation, class: "text-secondary" %>
+      <%= f.password_field :password_confirmation, class: "input" %> <%# 同上 %>
+    </div>
+
+    <div class="w-full flex flex-row gap-x-4 justify-center">
+      <%= f.submit t("common.sign_up"), class: "btn-primary" %>
+      <%= link_to t("common.quit"), root_path, class: "btn-primary" %>
+    </div>
+  <% end %>
+</div>
