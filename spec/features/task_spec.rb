@@ -2,19 +2,18 @@ require "rails_helper"
 
 RSpec.feature "Task Management", type: :feature do
   subject { page }
-  # let!(:task) { FactoryBot.create(:task, user: user) }
 
-  # 1. 先建立一個使用者
   let(:user) { create(:user, email: "test@example.com", password: "password") }
 
-  # 2. 所有的測試開始前都要登入
   before do
     visit login_path
     fill_in "電子信箱", with: user.email
     fill_in "密碼", with: user.password
     click_button "登入"
-    # 加入這行來偵錯：如果沒看到「登入成功」，測試會在這裡停住並告訴你
-    expect(page).to have_content "登入成功"
+  end
+
+  it "顯示登入成功訊息" do
+    is_expected.to have_content "登入成功"
   end
   describe "Task CRUD operations" do
     let!(:task) { create(:task, title: "舊任務", priority: 2, status: 0, user: user) }

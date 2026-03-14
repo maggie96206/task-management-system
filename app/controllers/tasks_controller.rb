@@ -1,9 +1,9 @@
 class TasksController < ApplicationController
   before_action :set_task, only: [ :show, :edit, :update, :destroy ]
-  before_action :authenticate_user! # 確保進來前都要登入
+  before_action :authenticate_user!
 
   def index
-    @pagy, @tasks = pagy(@current_user.tasks.includes(:user)
+    @pagy, @tasks = pagy(current_user.tasks.includes(:user)
                     .by_title(query_params[:title])
                     .by_status(query_params[:status])
                     .sorted_by(query_params[:sort]))
@@ -19,7 +19,7 @@ class TasksController < ApplicationController
   end
 
   def create
-    @task = @current_user.tasks.build(task_params)
+    @task = current_user.tasks.build(task_params)
 
     if @task.save
       redirect_to tasks_path, notice: t("tasks.flash.create")
