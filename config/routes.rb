@@ -1,4 +1,12 @@
 Rails.application.routes.draw do
+  get "/login", to: "sessions#new"
+  post "/login", to: "sessions#create"
+  delete "/logout", to: "sessions#destroy"
+  get "/signup", to: "users#new" # 註冊頁面
+
+  get "sessions/new"
+  get "sessions/create"
+  get "sessions/destroy"
   get "tasks/index"
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
@@ -12,6 +20,8 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   # root "posts#index"
-  root "tasks#index" # 設定首頁為任務列表
-  resources :tasks   # 自動產生 CRUD 的 8 個標準網址
+  root "tasks#index"
+  resources :tasks
+  resources :users, only: [ :new, :create ]
+  get "/signup", to: "users#new"
 end

@@ -2,8 +2,21 @@ require "rails_helper"
 
 RSpec.feature "Task Management", type: :feature do
   subject { page }
+
+  let(:user) { create(:user, email: "test@example.com", password: "password") }
+
+  before do
+    visit login_path
+    fill_in "電子信箱", with: user.email
+    fill_in "密碼", with: user.password
+    click_button "登入"
+  end
+
+  it "顯示登入成功訊息" do
+    is_expected.to have_content "登入成功"
+  end
   describe "Task CRUD operations" do
-    let!(:task) { create(:task, title: "舊任務", priority: 2, status: 0) }
+    let!(:task) { create(:task, title: "舊任務", priority: 2, status: 0, user: user) }
 
     context "when editing a task" do
       before do
@@ -37,8 +50,8 @@ RSpec.feature "Task Management", type: :feature do
   end
 
   describe "Task sorted by created_at" do
-    let!(:old_task) { create(:task, title: "舊任務", created_at: 1.day.ago) }
-    let!(:new_task) { create(:task, title: "新任務", created_at: Time.zone.now) }
+    let!(:old_task) { create(:task, title: "舊任務", created_at: 1.day.ago, user: user) }
+    let!(:new_task) { create(:task, title: "新任務", created_at: Time.zone.now, user: user) }
 
     before { visit tasks_path }
 
@@ -47,8 +60,8 @@ RSpec.feature "Task Management", type: :feature do
   end
 
   describe "Task sorted by end_at" do
-    let!(:earlier_task) { create(:task, title: "早結束任務", end_at: 1.day.from_now) }
-    let!(:later_task) { create(:task, title: "晚結束任務", end_at: 2.day.from_now) }
+    let!(:earlier_task) { create(:task, title: "早結束任務", end_at: 1.day.from_now, user: user) }
+    let!(:later_task) { create(:task, title: "晚結束任務", end_at: 2.day.from_now, user: user) }
 
     before { visit tasks_path(sort: "end_at") }
 
@@ -57,8 +70,8 @@ RSpec.feature "Task Management", type: :feature do
   end
 
   describe "Task sorted by priority" do
-    let!(:priority_low_task) { create(:task, title: "低優先度任務", priority: "low") }
-    let!(:priority_high_task) { create(:task, title: "高優先度任務", priority: "high") }
+    let!(:priority_low_task) { create(:task, title: "低優先度任務", priority: "low", user: user) }
+    let!(:priority_high_task) { create(:task, title: "高優先度任務", priority: "high", user: user) }
 
     before { visit tasks_path(sort: "priority") }
 
@@ -67,8 +80,8 @@ RSpec.feature "Task Management", type: :feature do
   end
 
   describe "Search task", type: :feature do
-    let!(:task_target) { create(:task, title: "估時會議", status: :pending) }
-    let!(:task_other) { create(:task, title: "吃午餐", status: :completed) }
+    let!(:task_target) { create(:task, title: "估時會議", status: :pending, user: user) }
+    let!(:task_other) { create(:task, title: "吃午餐", status: :completed, user: user) }
 
     context "when search by title and selected status" do
       subject { page }
