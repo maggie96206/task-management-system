@@ -34,6 +34,7 @@ class Admin::UsersController < ApplicationController
       end
 
       if @user.update(user_params)
+        @user.update_attribute(:admin, params[:user][:admin])
         redirect_to admin_users_path, notice: "使用者資料更新成功"
       else
         render :edit, status: :unprocessable_entity
@@ -62,6 +63,6 @@ class Admin::UsersController < ApplicationController
   end
 
   def user_params
-    params.require(:user).permit(:name, :email, :password, :admin)
+    params.require(:user).permit(:name, :email, :password)
   end
 end
