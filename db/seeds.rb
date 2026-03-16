@@ -10,6 +10,18 @@
 
 
 puts "正在準備seed資料"
+
+# 建立一個預設的管理員
+admin = User.find_or_create_by!(email: 'admin@example.com') do |user|
+  user.name = '系統管理員'
+  user.password = 'password123'
+  user.password_confirmation = 'password123'
+  user.admin = true
+  user.save!
+end
+
+puts "預設管理員已建立: #{admin.email} / password123"
+
 user = User.find_or_create_by!(email: "test@example.com") do |u|
   u.name = "Test User"
 end

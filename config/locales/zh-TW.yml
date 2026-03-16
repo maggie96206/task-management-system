@@ -61,11 +61,6 @@ zh-TW:
       search_title: "搜尋任務標題"
       search_status: "全部狀態"
       no_tasks: "目前沒有任何任務"
-    pagination:
-      text1: "顯示第"
-      text2: "筆，"
-      text3: "共"
-      text4: "筆結果"
     form:
       submit: "送出任務"   
     flash:
@@ -87,8 +82,14 @@ zh-TW:
       delete: "刪除"
       confirm_delete: "確定要刪除嗎？"
       search: "搜尋"
+      submit: "確認"
       return: "返回"
       quit: "取消"
       sign_up: "註冊"
       log_in: "登入"
       log_out: "登出"
+      pagination:
+        text1: "顯示第"
+        text2: "筆，"
+        text3: "共"
+        text4: "筆結果"
