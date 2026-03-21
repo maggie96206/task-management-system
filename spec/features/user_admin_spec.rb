@@ -3,8 +3,8 @@ require "rails_helper"
 RSpec.feature "Admin User Management", type: :feature do
   subject { page }
 
-  let(:admin) { create(:user, name: "Admin Boss", email: "admin@example.com", password: "password", admin: true) }
-  let!(:target_user) { create(:user, name: "Old User", email: "old@example.com", admin: false) }
+  let(:admin) { create(:user, :admin, name: "Admin", email: "admin@example.com", password: "password") }
+  let!(:target_user) { create(:user, name: "Old User", email: "old@example.com") }
 
   before do
     visit login_path
