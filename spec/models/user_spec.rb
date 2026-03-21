@@ -10,8 +10,8 @@ RSpec.describe User, type: :model do
       it { is_expected.not_to be_valid }
     end
 
-    context "when password is null" do
-      let(:user) { build(:user, password: nil) }
+    context "when password is too short" do
+      let(:user) { build(:user, password: 'ab') }
       it { is_expected.not_to be_valid }
     end
   end

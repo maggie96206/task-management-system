@@ -1,8 +1,11 @@
 class User < ApplicationRecord
   before_destroy :ensure_at_least_one_admin_remains
+
   has_secure_password
+  validates :password, length: { minimum: 3 }, allow_blank: true
 
   has_many :tasks, dependent: :destroy
+
   validates :email, presence: true, uniqueness: true
 
   private

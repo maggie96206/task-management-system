@@ -27,14 +27,10 @@ class Admin::UsersController < ApplicationController
   end
 
   def update
-      # 如果密碼欄位是空的，就從 params 中移除，避免驗證失敗
-      if params[:user][:password].blank?
-        params[:user].delete(:password)
-        params[:user].delete(:password_confirmation)
-      end
+      @user.assign_attributes(user_params)
+      @user.admin = params[:user][:admin]
 
-      if @user.update(user_params)
-        @user.update_attribute(:admin, params[:user][:admin])
+      if @user.save
         redirect_to admin_users_path, notice: "使用者資料更新成功"
       else
         render :edit, status: :unprocessable_entity
