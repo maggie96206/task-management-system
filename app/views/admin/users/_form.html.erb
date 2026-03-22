@@ -13,12 +13,12 @@
             </div>
 
             <div>
-                <%= f.label :password, "密碼 (如不修改請留白)" %>
+                <%= f.label :password %>
                 <%= f.password_field :password, class: "input_box" %>
             </div>
 
             <div>
-                <%= f.label :admin, "設為管理員" %>
+                <%= f.label :admin, t('.set_admin') %>
                 <%= f.check_box :admin, class: "input_box" %>
             </div>
 

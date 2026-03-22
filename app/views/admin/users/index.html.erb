@@ -1,26 +1,26 @@
 <div class="flex flex-col items-center">
     <div class="flex flex-col items-center">
-        <h1 class="text-primary mb-2">使用者管理</h1>
+        <h1 class="text-primary mb-2"><%= t('.title') %></h1>
         <div class="w-full">
-            <%= link_to "新增使用者", new_admin_user_path, class:"btn-primary mb-2" %>
+            <%= link_to t('.new_user'), new_admin_user_path, class:"btn-primary mb-2" %>
         </div>
         <table>
             <tr>
-                <th>名稱</th>
-                <th>任務數量</th>
-                <th>權限</th>
-                <th>操作</th>
+                <th><%= User.human_attribute_name(:name) %></th>
+                <th><%= t('.task_amount') %></th>
+                <th><%= User.human_attribute_name(:admin) %></th>
+                <th></th>
             </tr>
             
             <% @users.each do |user| %>
                 <tr>
                     <td><%= link_to user.name, admin_user_path(user) %></td>
                     <td><%= user.tasks.size %></td> 
-                    <td><%= user.admin? ? "管理員" : "一般使用者" %></td> 
+                    <td><%= user.admin? ? t('.right_admin') : t('.right_user') %></td> 
                     <td>
-                        <%= link_to "檢視", admin_user_path(user), class:"btn-primary" %>
-                        <%= link_to "編輯", edit_admin_user_path(user), class:"btn-primary" %>
-                        <%= link_to "刪除", admin_user_path(user), data: { turbo_method: :delete, turbo_confirm: "確定刪除？" }, class:"btn-primary" %>
+                        <%= link_to t('common.view'), admin_user_path(user), class:"btn-primary" %>
+                        <%= link_to t('common.edit'), edit_admin_user_path(user), class:"btn-primary" %>
+                        <%= link_to t('common.delete'), admin_user_path(user), data: { turbo_method: :delete, turbo_confirm: t('common.confirm_delete') }, class:"btn-primary" %>
                     </td>
                 </tr>
             <% end %>

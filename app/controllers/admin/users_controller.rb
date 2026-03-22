@@ -18,7 +18,7 @@ class Admin::UsersController < ApplicationController
     @user = User.new(user_params)
 
     if @user.save
-      redirect_to admin_users_path, notice: "成功新增使用者"
+      redirect_to admin_users_path, notice: t(:create, scope: s)
     else
       render :new, status: :unprocessable_entity
     end
@@ -27,31 +27,33 @@ class Admin::UsersController < ApplicationController
   end
 
   def update
-      @user.assign_attributes(user_params)
-      @user.admin = params[:user][:admin]
-
-      if @user.save
-        redirect_to admin_users_path, notice: "使用者資料更新成功"
-      else
-        render :edit, status: :unprocessable_entity
-      end
+    if @user.update(user_params)
+      @user.update_attribute(:admin, params[:user][:admin])
+      redirect_to admin_users_path, notice: t(:update, scope: s)
+    else
+      render :edit, status: :unprocessable_entity
+    end
   end
 
 
   def destroy
     if @user == current_user
-      redirect_to admin_users_path, alert: "不能刪除自己！"
+      redirect_to admin_users_path, alert: t(:do_not_delete_yourself, scope: s)
     else
       @user.destroy
-      redirect_to admin_users_path, notice: "使用者及其任務已刪除"
+      redirect_to admin_users_path, notice: t(:delete, scope: s)
     end
   end
 
 
   private
 
+  def s
+    %i[admin users flash]
+  end
+
   def check_admin
-    redirect_to root_path, alert: "您沒有管理權限！" unless current_user&.admin?
+    redirect_to root_path, alert: t(:no_right, scope: s) unless current_user&.admin?
   end
 
   def set_user

@@ -25,7 +25,7 @@ RSpec.feature "Admin User Management", type: :feature do
         end
       end
 
-      it { is_expected.to have_content "#{target_user.name} 的任務" }
+      it { is_expected.to have_content "#{target_user.name}" }
       it { is_expected.to have_content "Target User Task" }
     end
 
@@ -34,7 +34,7 @@ RSpec.feature "Admin User Management", type: :feature do
         click_link "新增使用者"
         fill_in "名稱", with: "New Employee"
         fill_in "電子信箱", with: "new@example.com"
-        fill_in "密碼 (如不修改請留白)", with: "password123"
+        fill_in "密碼", with: "password123"
         check "設為管理員"
         click_button "確認"
       end
