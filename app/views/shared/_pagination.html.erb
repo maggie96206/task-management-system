@@ -1,10 +1,12 @@
+<% s = %i[common pagination] %>
+
 <div class="flex items-center justify-between border-t border-gray-200 bg-white px-4 py-3 sm:px-6 mt-4">
   <div class="hidden sm:flex sm:flex-1 sm:items-center sm:justify-between">
     <div>
       <p class="text-sm text-gray-700">
-        <%= t(".text1") %> <span class="font-medium"><%= @pagy.from %></span> 
-        ~ <span class="font-medium"><%= @pagy.to %></span> <%= t(".text2") %>
-        <%= t(".text3") %> <span class="font-medium"><%= @pagy.count %></span> <%= t(".text4") %>
+        <%= t(:text1, scope: s) %> <span class="font-medium"><%= @pagy.from %></span> 
+        ~ <span class="font-medium"><%= @pagy.to %></span> <%= t(:text2, scope: s) %>
+        <%= t(:text3, scope: s) %> <span class="font-medium"><%= @pagy.count %></span> <%= t(:text4, scope: s) %>
       </p>
     </div>
     

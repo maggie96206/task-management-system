@@ -16,6 +16,7 @@ zh-TW:
         email: "電子信箱"
         password: "密碼"
         password_confirmation: "密碼確認"
+        admin: "權限"
     errors:
       messages:
         blank: "不能為空白"
@@ -61,11 +62,6 @@ zh-TW:
       search_title: "搜尋任務標題"
       search_status: "全部狀態"
       no_tasks: "目前沒有任何任務"
-    pagination:
-      text1: "顯示第"
-      text2: "筆，"
-      text3: "共"
-      text4: "筆結果"
     form:
       submit: "送出任務"   
     flash:
@@ -81,14 +77,40 @@ zh-TW:
     logged_out: "已登出"
     welcome: "歡迎，"
 
+  admin:
+    users:
+      index:
+        title: "使用者管理"
+        new_user: "新增使用者"
+        edit_user: "編輯使用者"
+        task_amount: "任務數量"
+        right_admin: "管理員"
+        right_user: "一般使用者"
+      form:
+        set_admin: "設為管理員"
+      flash:
+        create: "成功新增使用者"
+        update: "使用者資料更新成功"
+        delete: "使用者及其任務已刪除"
+        do_not_delete_yourself: "不能刪除自己！"
+        no_right: "您沒有管理權限！"
+
+        
+
   common:
       view: "檢視"
       edit: "編輯"
       delete: "刪除"
       confirm_delete: "確定要刪除嗎？"
       search: "搜尋"
+      submit: "確認"
       return: "返回"
       quit: "取消"
       sign_up: "註冊"
       log_in: "登入"
       log_out: "登出"
+      pagination:
+        text1: "顯示第"
+        text2: "筆，"
+        text3: "共"
+        text4: "筆結果"

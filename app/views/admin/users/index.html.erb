@@ -1,0 +1,31 @@
+<div class="flex flex-col items-center">
+    <div class="flex flex-col items-center">
+        <h1 class="text-primary mb-2"><%= t('.title') %></h1>
+        <div class="w-full">
+            <%= link_to t('.new_user'), new_admin_user_path, class:"btn-primary mb-2" %>
+        </div>
+        <table>
+            <tr>
+                <th><%= User.human_attribute_name(:name) %></th>
+                <th><%= t('.task_amount') %></th>
+                <th><%= User.human_attribute_name(:admin) %></th>
+                <th></th>
+            </tr>
+            
+            <% @users.each do |user| %>
+                <tr>
+                    <td><%= link_to user.name, admin_user_path(user) %></td>
+                    <td><%= user.tasks.size %></td> 
+                    <td><%= user.admin? ? t('.right_admin') : t('.right_user') %></td> 
+                    <td>
+                        <%= link_to t('common.view'), admin_user_path(user), class:"btn-primary" %>
+                        <%= link_to t('common.edit'), edit_admin_user_path(user), class:"btn-primary" %>
+                        <%= link_to t('common.delete'), admin_user_path(user), data: { turbo_method: :delete, turbo_confirm: t('common.confirm_delete') }, class:"btn-primary" %>
+                    </td>
+                </tr>
+            <% end %>
+        </table>
+    </div>
+</div>
+
+<%= render "shared/pagination" %>

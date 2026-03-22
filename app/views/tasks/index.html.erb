@@ -21,7 +21,7 @@
       </div>
 
       <%= form_with url: tasks_path, method: :get, local: true , class: "flex gap-4 items-center" do |f| %>
-        <%= f.text_field :title, placeholder: t('.search_title'), class: "border border-[#4E4E9A] p-2 rounded-2xl", value: params[:title] %>
+        <%= f.text_field :title, placeholder: t('.search_title'), class: "input_box", value: params[:title] %>
 
         <%= f.select :status, 
                     task_enum_options(:status), 
@@ -48,5 +48,5 @@
 </div>
 
 <%# 分頁按鈕 %>
-<%= render "pagination" %>
+<%= render "shared/pagination" %>
 

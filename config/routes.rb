@@ -4,10 +4,6 @@ Rails.application.routes.draw do
   delete "/logout", to: "sessions#destroy"
   get "/signup", to: "users#new" # 註冊頁面
 
-  get "sessions/new"
-  get "sessions/create"
-  get "sessions/destroy"
-  get "tasks/index"
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
@@ -23,5 +19,9 @@ Rails.application.routes.draw do
   root "tasks#index"
   resources :tasks
   resources :users, only: [ :new, :create ]
-  get "/signup", to: "users#new"
+
+  namespace :admin do
+    resources :users
+    root "users#index" # 讓 /admin 自動導向 /admin/users
+  end
 end
