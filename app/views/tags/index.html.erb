@@ -1,0 +1,43 @@
+<div class="flex flex-col items-center">
+    <div class="add-tag-area mb-4">
+        <%= turbo_frame_tag "new_tag_frame" do %>
+            <%= link_to t('.new_tag'), new_tag_path %>
+        <% end %>
+    </div>
+
+    <table>
+        <thead>
+            <tr>
+                <th><%= t('.title') %></th>
+                <th><%= t('common.manage') %></th>
+            </tr>
+        </thead>
+        <tbody id="tags_table_body">
+            <% if @tags.none? %>
+                <tr id="no_tags_row">
+                    <td colspan="2" class="text-center py-20 text-gray-400"><% t(".no_tags") %></td>
+                </tr>
+            <% end %>
+            <% @tags.each do |tag| %>
+                <tr>
+                    <td>
+                        <span class="tag">
+                            <%= tag.name %>
+                        </span>
+                    </td>
+                    <td>
+                        <%= link_to t('common.edit'), edit_tag_path(tag), class: "btn-secondary" %>
+                        <%= link_to t('common.delete'), tag_path(tag),
+                                    data: { turbo_method: :delete, turbo_confirm: t('common.confirm_delete') },
+                                    class: "btn-secondary" %>
+                    </td>
+                </tr>
+            <% end %>
+        </tbody>
+    </table>
+    
+  
+    <%= link_to t('common.return'), tasks_path, class: "btn-primary mt-4" %>
+</div>
+
+

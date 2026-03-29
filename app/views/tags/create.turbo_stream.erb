@@ -1,0 +1,39 @@
+<%# 更新 flash 訊息 %>
+<%= turbo_stream.update "flash_messages" do %>
+  <% flash.each do |type, msg| %>
+    <div class="flash-<%= type %>"><%= msg %></div>
+  <% end %>
+<% end %>
+
+<%# 「標籤輸入框」「新增標籤按鈕」轉換 %>
+<%= turbo_stream.replace "new_tag_frame" do %>
+  <%= turbo_frame_tag "new_tag_frame" do %>
+    <%= link_to t('tags.index.new_tag'), new_tag_path %>
+  <% end %>
+<% end %>
+
+<%# 針對【任務編輯頁】：加入新標籤到勾選清單，並預設勾選 %>
+<%= turbo_stream.append "tag_list_container" do %>
+  <div class="tag-item">
+    <input type="checkbox" name="task[tag_ids][]" id="task_tag_ids_<%= @tag.id %>" value="<%= @tag.id %>" checked="checked">
+    <label for="task_tag_ids_<%= @tag.id %>"><%= @tag.name %></label>
+  </div>
+<% end %>
+
+<%# 針對【標籤列表頁】：移除「無標籤」提示列，再插入新的一列 %>
+<%= turbo_stream.remove "no_tags_row" %>
+<%= turbo_stream.append "tags_table_body" do %>
+    <tr>
+        <td>
+            <span class="tag">
+                <%= @tag.name %>
+            </span>
+        </td>
+        <td>
+            <%= link_to t('common.edit'), edit_tag_path(@tag), class: "btn-secondary" %>
+            <%= link_to t('common.delete'), tag_path(@tag),
+                        data: { turbo_method: :delete, turbo_confirm: t('common.confirm_delete') },
+                        class: "btn-secondary" %>
+        </td>
+    </tr>
+<% end %>

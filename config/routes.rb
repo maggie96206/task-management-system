@@ -20,6 +20,9 @@ Rails.application.routes.draw do
   resources :tasks
   resources :users, only: [ :new, :create ]
 
+  resources :tags
+
+
   namespace :admin do
     resources :users
     root "users#index" # 讓 /admin 自動導向 /admin/users

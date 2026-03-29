@@ -3,13 +3,20 @@
   <div class="w-full flex flex-col items-center">
     <h1 class="text-primary"><%= t('.title') %></h1>
 
-    <div class="w-full mb-4 flex">
+    <div class="w-full mb-4 flex gap-2">
       <%= link_to new_task_path, class: "flex items-center gap-2 px-6 py-2 border border-2 border-[#8585D8] text-[#8585D8] rounded-full font-bold hover:bg-[#8585D8] hover:text-white transition" do %>
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" class="w-5 h-5">
           <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
         </svg>
         
         <span><%= t('.new_task') %></span>
+      <% end %>
+      <%= link_to tags_path, class: "flex items-center gap-2 px-6 py-2 border border-2 border-[#8585D8] text-[#8585D8] rounded-full font-bold hover:bg-[#8585D8] hover:text-white transition" do %>
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" class="w-5 h-5">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m2.25 0H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z" />
+        </svg>
+        
+        <span><%= t('.show_tags') %></span>
       <% end %>
     </div>
 
@@ -27,6 +34,8 @@
                     task_enum_options(:status), 
                     { include_blank: t('.search_status'), selected: params[:status] },
                     class: "block rounded-md sm:text-sm" %>
+
+        <%= f.select :tag_id, current_user.tags.pluck(:name, :id), {include_blank: t('tags.index.all_tags'), selected: params[:tag_id]}, class: "block rounded-md sm:text-sm" %>
 
         <%= f.submit t('common.search'),
             class: "btn-primary" %>

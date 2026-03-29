@@ -6,6 +6,7 @@ class TasksController < ApplicationController
     @pagy, @tasks = pagy(current_user.tasks.includes(:user)
                     .by_title(query_params[:title])
                     .by_status(query_params[:status])
+                    .by_tag(query_params[:tag_id])
                     .sorted_by(query_params[:sort]))
   end
 
@@ -52,10 +53,10 @@ class TasksController < ApplicationController
 
   def task_params
     # 允許 Migration 定義過的欄位
-    params.require(:task).permit(:title, :content, :start_at, :end_at, :priority, :status)
+    params.require(:task).permit(:title, :content, :start_at, :end_at, :priority, :status, tag_ids: [], tags_attributes: [ :id, :name ])
   end
 
   def query_params
-    params.permit(:sort, :title, :status)
+    params.permit(:sort, :title, :status, :tag_id)
   end
 end

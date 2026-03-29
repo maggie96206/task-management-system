@@ -3,6 +3,7 @@ zh-TW:
     models:
       task: "任務"
       users: "使用者"
+      tags: "標籤"
     attributes:
       task:
         title: "任務標題"
@@ -17,6 +18,8 @@ zh-TW:
         password: "密碼"
         password_confirmation: "密碼確認"
         admin: "權限"
+      tag:
+        name: "標籤名稱"
     errors:
       messages:
         blank: "不能為空白"
@@ -32,7 +35,13 @@ zh-TW:
             email:
               taken: "已被註冊"
             password_confirmation:
-              confirmation: "不一致"    
+              confirmation: "不一致"
+            base:
+              at_least_one_admin: "至少要留一個管理員"
+        tag:
+          attributes:
+            name:
+              taken: "已存在"
   enums:
     task:
       status:
@@ -62,6 +71,7 @@ zh-TW:
       search_title: "搜尋任務標題"
       search_status: "全部狀態"
       no_tasks: "目前沒有任何任務"
+      show_tags: "查看標籤列表"
     form:
       submit: "送出任務"   
     flash:
@@ -93,11 +103,22 @@ zh-TW:
         update: "使用者資料更新成功"
         delete: "使用者及其任務已刪除"
         do_not_delete_yourself: "不能刪除自己！"
+        do_not_delete_all_admin: "至少要留一個管理員"
         no_right: "您沒有管理權限！"
 
-        
+  tags:
+    index:
+      title: "標籤列表"
+      new_tag: "+ 新增標籤"
+      no_tags: "目前沒有任何標籤"
+      all_tags: "所有標籤"
+    flash:
+      create: "標籤建立成功"
+      update: "標籤更新成功"
+      destroy: "標籤已刪除"
 
   common:
+      manage: "操作"
       view: "檢視"
       edit: "編輯"
       delete: "刪除"

@@ -28,11 +28,23 @@
     .input_box {
         @apply border border-[#4E4E9A] p-2 rounded-2xl
     }
+
+    .add-tag-area {
+        @apply px-4 py-2 border border-[#4E4E9A] rounded-2xl text-[#4A4A8A];
+    }
+
+    .tag-checkbox {
+        @apply text-[#4A4A8A] space-x-2;
+    }
+
+    .tag {
+        @apply px-6 py-2 border border-[#4E4E9A] text-[#4A4A8A] rounded-2xl text-sm;
+    }
 }
 
 @layer base {
     th {
-        @apply px-4 py-2 border border-gray-300 bg-gray-100 font-semibold;
+        @apply px-4 py-2 border border-gray-300 bg-[#F5F5F5] font-semibold text-[#4A4A8A];
     }
 
     td {

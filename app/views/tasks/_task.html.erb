@@ -19,7 +19,7 @@
   </div>
 
   <%# 開始時間 結束時間 優先度 狀態 %>
-  <div class="flex flex-wrap items-center gap-x-8 gap-y-4 text-[#4A4A8A] font-medium">
+  <div class="flex flex-wrap items-center gap-x-8 gap-y-4 text-[#4A4A8A] font-medium mb-6">
     
     <div class="flex items-center">
       <span class="border-l-4 border-[#4A4A8A] h-5 mr-3"></span>
@@ -42,4 +42,9 @@
     </div>
 
   </div>
+
+  <% task.tags.each do |tag| %>
+    <span class="tag"># <%= tag.name %></span>
+  <% end %>
+
 </div>
