@@ -28,7 +28,7 @@ RSpec.describe Task, type: :model do
 
   describe "Search by tag" do
     let!(:tag) { create(:tag) }
-    let!(:task_with_tag) { create(:task, tags: [tag]) }
+    let!(:task_with_tag) { create(:task, tags: [ tag ]) }
     let!(:task_without_tag) { create(:task) }
 
     subject { Task.by_tag(tag.id) }

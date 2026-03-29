@@ -55,7 +55,7 @@ RSpec.feature "Tag Management", type: :feature do
     let!(:tag) { create(:tag, name: "工作標籤", user: user) }
 
     context "when task has a tag, it shows in task list" do
-      let!(:task) { create(:task, title: "標籤任務", user: user, tags: [tag]) }
+      let!(:task) { create(:task, title: "標籤任務", user: user, tags: [ tag ]) }
 
       before { visit tasks_path }
 
@@ -63,7 +63,7 @@ RSpec.feature "Tag Management", type: :feature do
     end
 
     context "when searching tasks by tag" do
-      let!(:task_with_tag) { create(:task, title: "有標籤的任務", user: user, tags: [tag]) }
+      let!(:task_with_tag) { create(:task, title: "有標籤的任務", user: user, tags: [ tag ]) }
       let!(:task_without_tag) { create(:task, title: "無標籤的任務", user: user) }
 
       before do
