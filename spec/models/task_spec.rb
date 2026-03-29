@@ -4,6 +4,7 @@ RSpec.describe Task, type: :model do
   describe "Task validation" do
     subject { task }
     let(:task) { build(:task) }
+    it { is_expected.to have_many(:tags).through(:task_tags) }
 
     context "when title is null" do
       let(:task) { build(:task, title: nil) }
@@ -23,5 +24,15 @@ RSpec.describe Task, type: :model do
     subject { Task.by_title("估時") }
     it { is_expected.to include(task1) }
     it { is_expected.not_to include(task2) }
+  end
+
+  describe "Search by tag" do
+    let!(:tag) { create(:tag) }
+    let!(:task_with_tag) { create(:task, tags: [tag]) }
+    let!(:task_without_tag) { create(:task) }
+
+    subject { Task.by_tag(tag.id) }
+    it { is_expected.to include(task_with_tag) }
+    it { is_expected.not_to include(task_without_tag) }
   end
 end

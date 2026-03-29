@@ -1,6 +1,6 @@
 FactoryBot.define do
   factory :tag do
-    name { "MyString" }
-    user { nil }
+    name { "標籤1" }
+    association :user
   end
 end
