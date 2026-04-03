@@ -1,5 +1,12 @@
 @import "tailwindcss";
 
+@theme {
+    --color-btn-primary: #7B7BD8;
+    --color-btn-secondary: #B5B5E0;
+    --color-btn-hover: #4338CA;
+    --color-stroke: #4E4E9A;
+}
+
 @layer components {
     .text-primary {
         @apply block text-[32px] font-bold text-gray-700;
@@ -10,15 +17,15 @@
     }
 
     .input {
-        @apply rounded-md border-[#4E4E9A] shadow-sm focus:border-indigo-500 focus:ring-indigo-500 w-full;
+        @apply rounded-md border-stroke shadow-sm focus:border-indigo-500 focus:ring-indigo-500 w-full;
     }
 
     .btn-primary {
-        @apply inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-lg text-white bg-[#7B7BD8] hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500;
+        @apply inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-lg text-white bg-btn-primary hover:bg-btn-hover focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500;
     }
 
     .btn-secondary {
-        @apply px-6 py-1 bg-[#B5B5E0] text-white rounded-full text-sm hover:bg-indigo-700 transition;
+        @apply px-6 py-1 bg-btn-secondary text-white rounded-full text-sm hover:bg-btn-hover transition;
     }
 
     .page-container {
@@ -26,13 +33,25 @@
     }
 
     .input_box {
-        @apply border border-[#4E4E9A] p-2 rounded-2xl
+        @apply border border-stroke p-2 rounded-2xl
+    }
+
+    .add-tag-area {
+        @apply px-4 py-2 border border-stroke rounded-2xl text-stroke;
+    }
+
+    .tag-checkbox {
+        @apply text-stroke space-x-2;
+    }
+
+    .tag {
+        @apply px-6 py-2 border border-stroke text-stroke rounded-2xl text-sm;
     }
 }
 
 @layer base {
     th {
-        @apply px-4 py-2 border border-gray-300 bg-gray-100 font-semibold;
+        @apply px-4 py-2 border border-gray-300 bg-[#F5F5F5] font-semibold text-stroke;
     }
 
     td {

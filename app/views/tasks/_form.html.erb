@@ -11,8 +11,6 @@
       </div>
     <% end %>
 
-
-
     <div class="flex flex-col">
       <%= f.label :title, class: "text-secondary" %>
       <%= f.text_field :title, class: "input" %>
@@ -45,9 +43,26 @@
       </div>
     </div>
 
+
+    <%# 標籤 %>
+    <div class="field">
+      <%= f.label :tag_ids, t('tags.index.title') %>
+      <div id="tag_list_container" class="tag-checkbox">
+        <%= f.collection_check_boxes :tag_ids, @current_user.tags.all, :id, :name %>
+      </div>
+    </div>
+
+    <div class="add-tag-area">
+      <%= turbo_frame_tag "new_tag_frame" do %>
+        <%= link_to t("tags.index.new_tag"), new_tag_path %>
+      <% end %>
+    </div>
+
     <div class="w-full flex flex-row gap-x-4 justify-center">
       <%= f.submit t('.submit'), class: "btn-primary" %>
       <%= link_to t('common.quit'), tasks_path, class: "btn-primary" %>
     </div>
+
+
   <% end %>
 </div>

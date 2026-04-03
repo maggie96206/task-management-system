@@ -1,5 +1,7 @@
 class Task < ApplicationRecord
   belongs_to :user
+  has_many :task_tags, dependent: :destroy
+  has_many :tags, through: :task_tags
 
   # 標題不可空白
   validates :title, presence: true
@@ -33,6 +35,12 @@ class Task < ApplicationRecord
   def human_priority
     I18n.t("enums.task.priority.#{priority}")
   end
+
+  # 標籤
+  scope :by_tag, ->(tag_id) { joins(:tags).where(tags: { id: tag_id }) if tag_id.present? }
+
+  # 允許透過 Task 同時建立 Tag
+  accepts_nested_attributes_for :tags, reject_if: :all_blank
 
   private
 
