@@ -73,11 +73,13 @@ zh-TW:
       no_tasks: "目前沒有任何任務"
       show_tags: "查看標籤列表"
     form:
-      submit: "送出任務"   
-    flash:
-      create: "任務已成功建立！"
-      update: "任務已更新成功！"
-      delete: "任務已刪除！"
+      submit: "送出任務" 
+    update:
+      success: "任務已更新成功！"
+    create:
+      success: "任務已成功建立！"
+    destroy:
+      success: "任務已刪除！" 
 
   sessions:
     please_log_in: "請先登入"
@@ -112,10 +114,13 @@ zh-TW:
       new_tag: "+ 新增標籤"
       no_tags: "目前沒有任何標籤"
       all_tags: "所有標籤"
-    flash:
-      create: "標籤建立成功"
-      update: "標籤更新成功"
-      destroy: "標籤已刪除"
+    update:
+      success: "標籤更新成功"
+    create:
+      success: "標籤建立成功"
+    destroy:
+      success: "標籤已刪除"
+
 
   common:
       manage: "操作"

@@ -5,34 +5,45 @@
 
     <div class="space-y-6">
         <p>
-        <strong><%= Task.human_attribute_name(:title) %>：</strong>
-        <%= @task.title %>
+            <strong><%= Task.human_attribute_name(:title) %>：</strong>
+            <%= @task.title %>
         </p>
 
         <p>
-        <strong><%= Task.human_attribute_name(:content) %>：</strong>
-        <%= @task.content %>
+            <strong><%= Task.human_attribute_name(:content) %>：</strong>
+            <%= @task.content %>
         </p>
 
         <p>
-        <strong><%= Task.human_attribute_name(:start_at) %>：</strong>
-        <%= @task.start_at %>
+            <strong><%= Task.human_attribute_name(:start_at) %>：</strong>
+            <%= @task.start_at %>
         </p>
 
         <p>
-        <strong><%= Task.human_attribute_name(:end_at) %>：</strong>
-        <%= @task.end_at %>
+            <strong><%= Task.human_attribute_name(:end_at) %>：</strong>
+            <%= @task.end_at %>
         </p>
 
         <p>
-        <strong><%= Task.human_attribute_name(:priority) %>：</strong>
-        <%= @task.human_priority %>
+            <strong><%= Task.human_attribute_name(:priority) %>：</strong>
+            <%= @task.human_priority %>
         </p>
 
         <p>
-        <strong><%= Task.human_attribute_name(:status) %>：</strong>
-        <%= @task.human_status %>
+            <strong><%= Task.human_attribute_name(:status) %>：</strong>
+            <%= @task.human_status %>
         </p>
+
+         <div>
+            <strong><%= Tag.human_attribute_name(:name) %>：</strong>
+            <% @task.tags.each do |tag| %>
+                <div>
+                    <%= tag.name %>
+                </div>
+            <% end %>
+        </div>
+
+
     </div>
 
 
