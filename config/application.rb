@@ -33,5 +33,8 @@ module TaskManagementSystem
 
     # 設定資料庫儲存的時間格式（通常保持 UTC，但 Rails 會自動幫你轉換）
     config.active_record.default_timezone = :utc
+
+    # 使用自己的路由處理例外狀況
+    config.exceptions_app = self.routes
   end
 end

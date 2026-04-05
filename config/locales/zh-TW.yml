@@ -52,12 +52,18 @@ zh-TW:
         low: "低"
         normal: "中"
         high: "高"
+  
   errors:
     template:
       header:
         one: "有 1 個錯誤導致 %{model} 儲存失敗"
         other: "有 %{count} 個錯誤導致 %{model} 儲存失敗"
       body: "請檢查以下欄位："
+    not_found:
+      content: "抱歉，找不到這個頁面QQ"
+    internal_server_error:
+      content: "伺服器出了點問題，搶修中..."
+      
   
   tasks:
     index:
@@ -135,6 +141,7 @@ zh-TW:
       sign_up: "註冊"
       log_in: "登入"
       log_out: "登出"
+      back_to_homepage: "回首頁"
       pagination:
         text1: "顯示第"
         text2: "筆，"
