@@ -60,9 +60,9 @@ zh-TW:
         other: "有 %{count} 個錯誤導致 %{model} 儲存失敗"
       body: "請檢查以下欄位："
     not_found:
-      content: "抱歉，我們找不到這個頁面。"
+      content: "抱歉，找不到這個頁面QQ"
     internal_server_error:
-      content: "糟糕！伺服器出了點問題，我們正在搶修中。"
+      content: "伺服器出了點問題，搶修中..."
       
   
   tasks:
