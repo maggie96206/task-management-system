@@ -23,7 +23,7 @@ class TasksController < ApplicationController
     @task = current_user.tasks.build(task_params)
 
     if @task.save
-      redirect_to tasks_path, notice: t("tasks.flash.create")
+      redirect_to tasks_path, notice: t(".success")
     else
       render :new, status: :unprocessable_entity
     end
@@ -34,7 +34,7 @@ class TasksController < ApplicationController
 
   def update
     if @task.update(task_params)
-      redirect_to tasks_path, notice: t("tasks.flash.update")
+      redirect_to tasks_path, notice: t(".success")
     else
       render :edit, status: :unprocessable_entity
     end
@@ -42,7 +42,7 @@ class TasksController < ApplicationController
 
   def destroy
     @task.destroy
-    redirect_to tasks_path, notice: t("tasks.flash.delete")
+    redirect_to tasks_path, notice: t(".success")
   end
 
   private

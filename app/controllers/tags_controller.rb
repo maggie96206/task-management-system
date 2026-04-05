@@ -14,7 +14,7 @@ class TagsController < ApplicationController
   def create
     @tag = current_user.tags.new(tag_params)
     if @tag.save
-      flash.now[:notice] = t(:create, scope: s)
+      flash.now[:notice] = t(".success")
       respond_to do |format|
         format.turbo_stream
       end
@@ -29,7 +29,7 @@ class TagsController < ApplicationController
 
   def update
     if @tag.update(tag_params)
-      redirect_to tags_path, notice: t(:update, scope: s)
+      redirect_to tags_path, notice: t(".success")
     else
       render :edit, status: :unprocessable_entity
     end
@@ -37,7 +37,7 @@ class TagsController < ApplicationController
 
   def destroy
     @tag.destroy
-    redirect_to tags_path, notice: t(:destroy, scope: s)
+    redirect_to tags_path, notice: t(".success")
   end
 
   private
@@ -48,9 +48,5 @@ class TagsController < ApplicationController
 
   def tag_params
     params.require(:tag).permit(:name)
-  end
-
-  def s
-    %i[tags flash]
   end
 end
