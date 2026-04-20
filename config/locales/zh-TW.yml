@@ -94,6 +94,7 @@ zh-TW:
     log_in_fail: "密碼或信箱錯誤"
     logged_out: "已登出"
     welcome: "歡迎，"
+    warning: "提醒：您有 %{count} 個任務即將到期或已過期！"
 
   admin:
     users:
