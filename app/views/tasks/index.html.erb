@@ -4,7 +4,7 @@
     <h1 class="text-primary"><%= t('.title') %></h1>
 
     <div class="w-full mb-4 flex gap-2">
-      <%= link_to new_task_path, class: "flex items-center gap-2 px-6 py-2 border border-2 border-[#8585D8] text-[#8585D8] rounded-full font-bold hover:bg-[#8585D8] hover:text-white transition" do %>
+      <%= link_to new_task_path, data: { turbo_frame: "modal" }, class: "flex items-center gap-2 px-6 py-2 border border-2 border-[#8585D8] text-[#8585D8] rounded-full font-bold hover:bg-[#8585D8] hover:text-white transition" do %>
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" class="w-5 h-5">
           <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
         </svg>
@@ -42,9 +42,6 @@
       <% end %>
     </div>
   </div>
-  
-
-  
 
   <%# 任務卡片 %>
   <div class="mt-6">
@@ -58,4 +55,11 @@
 
 <%# 分頁按鈕 %>
 <%= render "shared/pagination" %>
+
+<turbo-frame id="modal"
+  data-turbo-action="advance"
+  data-controller="modal"
+  data-return-url="<%= tasks_path %>"
+  data-action="click->modal#closeOnBackdrop">
+</turbo-frame>
 

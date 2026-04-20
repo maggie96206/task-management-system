@@ -1,55 +1,90 @@
-<div class="page-container items-center gap-y-4">
+<% if turbo_frame_request? %>
+  <%= turbo_frame_tag "modal" do %>
+    <div class="modal-box">
+      <button class="modal-close-btn" data-action="click->modal#close">&times;</button>
+      <h1 class="text-primary mb-6"><%= t('tasks.index.view_task') %></h1>
+
+      <div class="space-y-4">
+        <p>
+          <strong><%= Task.human_attribute_name(:title) %>：</strong>
+          <%= @task.title %>
+        </p>
+        <p>
+          <strong><%= Task.human_attribute_name(:content) %>：</strong>
+          <%= @task.content %>
+        </p>
+        <p>
+          <strong><%= Task.human_attribute_name(:start_at) %>：</strong>
+          <%= @task.start_at&.strftime("%Y/%m/%d %H:%M") %>
+        </p>
+        <p>
+          <strong><%= Task.human_attribute_name(:end_at) %>：</strong>
+          <%= @task.end_at&.strftime("%Y/%m/%d %H:%M") %>
+        </p>
+        <p>
+          <strong><%= Task.human_attribute_name(:priority) %>：</strong>
+          <%= @task.human_priority %>
+        </p>
+        <p>
+          <strong><%= Task.human_attribute_name(:status) %>：</strong>
+          <%= @task.human_status %>
+        </p>
+        <div>
+          <strong><%= Tag.human_attribute_name(:name) %>：</strong>
+          <% @task.tags.each do |tag| %>
+            <span class="tag"># <%= tag.name %></span>
+          <% end %>
+        </div>
+      </div>
+
+      <div class="flex gap-4 justify-center mt-8">
+        <%= link_to t('common.edit'), edit_task_path(@task), class: "btn-primary", data: { turbo_frame: "modal" } %>
+        <%= link_to t('common.return'), tasks_path, class: "btn-primary", data: { turbo_frame: "modal", action: "click->modal#close" } %>
+      </div>
+    </div>
+  <% end %>
+<% else %>
+  <div class="page-container items-center gap-y-4">
     <div class="w-full flex flex-col items-center">
-        <h1 class="text-primary"><%= t('tasks.index.view_task') %></h1>
+      <h1 class="text-primary"><%= t('tasks.index.view_task') %></h1>
     </div>
 
     <div class="space-y-6">
-        <p>
-            <strong><%= Task.human_attribute_name(:title) %>：</strong>
-            <%= @task.title %>
-        </p>
-
-        <p>
-            <strong><%= Task.human_attribute_name(:content) %>：</strong>
-            <%= @task.content %>
-        </p>
-
-        <p>
-            <strong><%= Task.human_attribute_name(:start_at) %>：</strong>
-            <%= @task.start_at %>
-        </p>
-
-        <p>
-            <strong><%= Task.human_attribute_name(:end_at) %>：</strong>
-            <%= @task.end_at %>
-        </p>
-
-        <p>
-            <strong><%= Task.human_attribute_name(:priority) %>：</strong>
-            <%= @task.human_priority %>
-        </p>
-
-        <p>
-            <strong><%= Task.human_attribute_name(:status) %>：</strong>
-            <%= @task.human_status %>
-        </p>
-
-         <div>
-            <strong><%= Tag.human_attribute_name(:name) %>：</strong>
-            <% @task.tags.each do |tag| %>
-                <div>
-                    <%= tag.name %>
-                </div>
-            <% end %>
-        </div>
-
-
+      <p>
+        <strong><%= Task.human_attribute_name(:title) %>：</strong>
+        <%= @task.title %>
+      </p>
+      <p>
+        <strong><%= Task.human_attribute_name(:content) %>：</strong>
+        <%= @task.content %>
+      </p>
+      <p>
+        <strong><%= Task.human_attribute_name(:start_at) %>：</strong>
+        <%= @task.start_at %>
+      </p>
+      <p>
+        <strong><%= Task.human_attribute_name(:end_at) %>：</strong>
+        <%= @task.end_at %>
+      </p>
+      <p>
+        <strong><%= Task.human_attribute_name(:priority) %>：</strong>
+        <%= @task.human_priority %>
+      </p>
+      <p>
+        <strong><%= Task.human_attribute_name(:status) %>：</strong>
+        <%= @task.human_status %>
+      </p>
+      <div>
+        <strong><%= Tag.human_attribute_name(:name) %>：</strong>
+        <% @task.tags.each do |tag| %>
+          <div><%= tag.name %></div>
+        <% end %>
+      </div>
     </div>
-
 
     <div class="w-full flex flex-row gap-x-4 justify-center">
-      <%= link_to t('common.edit'), edit_task_path(@task) , class: "btn-primary" %>
-      <%= link_to t('common.return'), tasks_path , class: "btn-primary" %>
+      <%= link_to t('common.edit'), edit_task_path(@task), class: "btn-primary" %>
+      <%= link_to t('common.return'), tasks_path, class: "btn-primary", data: { turbo_frame: "modal", action: "click->modal#close" }  %>
     </div>
-   
-</div>
+  </div>
+<% end %>
