@@ -5,8 +5,8 @@
     <h3 class="task-title text-2xl font-bold text-stroke"><%= task.title %></h3>
     
     <div class="flex gap-3">
-      <%= link_to t('common.view'), task_path(task), class: "btn-secondary" %>
-      <%= link_to t('common.edit'), edit_task_path(task), class: "btn-secondary" %>
+      <%= link_to t('common.view'), task_path(task), class: "btn-secondary", data: { turbo_frame: "modal" } %>
+      <%= link_to t('common.edit'), edit_task_path(task), class: "btn-secondary", data: { turbo_frame: "modal" } %>
       <%= link_to t('common.delete'), task_path(task), 
                   data: { turbo_method: :delete, turbo_confirm: t('common.confirm_delete') }, 
                   class: "btn-secondary" %>

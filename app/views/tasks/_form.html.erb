@@ -1,5 +1,5 @@
 <div class="w-full h-full flex flex-col py-5 px-20 items-center">
-  <%= form_with(model: task, local: true, class: "space-y-6 max-w-lg") do |f| %>
+  <%= form_with(model: task, class: "space-y-6 max-w-lg", data: { turbo_frame: "_top" }) do |f| %>
 
     <% if task.errors.any? %>
       <div class="error-messages">
@@ -60,7 +60,7 @@
 
     <div class="w-full flex flex-row gap-x-4 justify-center">
       <%= f.submit t('.submit'), class: "btn-primary" %>
-      <%= link_to t('common.quit'), tasks_path, class: "btn-primary" %>
+      <%= link_to t('common.quit'), tasks_path, class: "btn-primary", data: { turbo_frame: "modal", action: "click->modal#close" } %>
     </div>
 
 
